@@ -1,0 +1,142 @@
+[
+    {
+        "id": "ca58e4c978f3747c",
+        "type": "tab",
+        "label": "Startup - Table Instantiation, Deletion & Other Manual Controls",
+        "disabled": false,
+        "info": "This flow should be used to instatiate the required tables at the start of a given demonstration.\n\nTwo tables are instantiated; one (Orders) for OrderID (primary key) and ThroughputTime, and one (Processes) for ProcessID (primary key), ProcessType, OrderID(foreign key), StartTime and FinishTime.\n\nThe tables are automatically instantiated after 0.1 seconds, the tables can be manually dropped.\n\nFurther tables may be added as necessary.\n\nAll tables are stored in :memory: which is not persistent - new deployments and powercycles will reset the database.",
+        "env": []
+    },
+    {
+        "id": "9d186480790fb4de",
+        "type": "inject",
+        "z": "ca58e4c978f3747c",
+        "name": "Drop Table - orders",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "DROP TABLE orders",
+        "payloadType": "date",
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "3ae3c28922ec3e55"
+            ]
+        ]
+    },
+    {
+        "id": "3ae3c28922ec3e55",
+        "type": "sqlite",
+        "z": "ca58e4c978f3747c",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 480,
+        "y": 20,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1f0356860d92b287",
+        "type": "inject",
+        "z": "ca58e4c978f3747c",
+        "name": "Create Table - processes",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "CREATE TABLE processes(ProcessID INTEGER PRIMARY KEY AUTOINCREMENT, ProcessType VARCHAR(10), OrderID INTEGER, StartTime TIMESTAMP, FinishTime TIMESTAMP, FOREIGN KEY (OrderID) REFERENCES orders(OrderID))",
+        "payloadType": "date",
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "3ae3c28922ec3e55"
+            ]
+        ]
+    },
+    {
+        "id": "c996fa88bb63551c",
+        "type": "inject",
+        "z": "ca58e4c978f3747c",
+        "name": "Create Table - orders",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "CREATE TABLE orders(OrderID INTEGER PRIMARY KEY, Timestamp TIMESTAMP, ThroughputTime TIME)",
+        "payloadType": "date",
+        "x": 160,
+        "y": 20,
+        "wires": [
+            [
+                "3ae3c28922ec3e55"
+            ]
+        ]
+    },
+    {
+        "id": "0ce387a97ace3369",
+        "type": "inject",
+        "z": "ca58e4c978f3747c",
+        "name": "Drop Table - processes",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "DROP TABLE processes",
+        "payloadType": "date",
+        "x": 140,
+        "y": 340,
+        "wires": [
+            [
+                "3ae3c28922ec3e55"
+            ]
+        ]
+    },
+    {
+        "id": "99c4812a67090969",
+        "type": "sqlitedb",
+        "db": ":memory:",
+        "mode": "RWC"
+    }
+]
