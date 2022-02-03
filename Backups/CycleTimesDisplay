@@ -1,0 +1,791 @@
+[
+    {
+        "id": "ed3215767a63e2a1",
+        "type": "tab",
+        "label": "Display - Output to UI",
+        "disabled": false,
+        "info": "This flow should control the outputs to the UI.\n\nSpecifics not yet determined.\n\nMinimum Functionality:\noutput orderID, list of processes, throughput time.\n\nPreferred Functionality:\noutput orderID, list of processes, throughput time, cycle time.",
+        "env": []
+    },
+    {
+        "id": "cbcf1100eb9dbf4f",
+        "type": "ui_template",
+        "z": "ed3215767a63e2a1",
+        "group": "bac0e27560e10b09",
+        "name": "UI Table - orders",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "format": "<table style=\"width:100%\">\n  <tr>\n    <th>OrderID</th> \n    <th>Order Received</th>\n    <th>Throughput Time</th> \n    \n  </tr>\n  <tr ng-repeat=\"x in msg.payload | limitTo:20\">\n    <td>{{msg.payload[$index}].OrderID}</td>\n    <td>{{msg.payload[$index].TimeStamp}}</td>\n    <td>{{msg.payload[$index].ThroughputTime}}</td>\n  </tr>\n</table>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 620,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c21c3ac510b816a3",
+        "type": "sqlite",
+        "z": "ed3215767a63e2a1",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 420,
+        "y": 60,
+        "wires": [
+            [
+                "cbcf1100eb9dbf4f"
+            ]
+        ]
+    },
+    {
+        "id": "3f9b8bbe03366693",
+        "type": "inject",
+        "z": "ed3215767a63e2a1",
+        "name": "View Record - orders",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "SELECT * FROM orders ORDER BY TimeStamp;",
+        "payloadType": "date",
+        "x": 200,
+        "y": 60,
+        "wires": [
+            [
+                "c21c3ac510b816a3"
+            ]
+        ]
+    },
+    {
+        "id": "b8055b6dc422fe87",
+        "type": "ui_text_input",
+        "z": "ed3215767a63e2a1",
+        "name": "Search OrderID",
+        "label": "Search OrderID",
+        "tooltip": "",
+        "group": "bac0e27560e10b09",
+        "order": 1,
+        "width": "10",
+        "height": "1",
+        "passthru": true,
+        "mode": "number",
+        "delay": "0",
+        "topic": "SELECT * FROM orders INPUT;",
+        "sendOnBlur": true,
+        "topicType": "str",
+        "x": 160,
+        "y": 300,
+        "wires": [
+            [
+                "e28fe6544f6afed4"
+            ]
+        ]
+    },
+    {
+        "id": "17dcb921fe15277a",
+        "type": "change",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "INPUT",
+                "fromt": "str",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 200,
+        "wires": [
+            [
+                "c21c3ac510b816a3"
+            ]
+        ]
+    },
+    {
+        "id": "e28fe6544f6afed4",
+        "type": "switch",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "0aae1b747396cb51"
+            ],
+            [
+                "07e1e94022add172"
+            ]
+        ]
+    },
+    {
+        "id": "07e1e94022add172",
+        "type": "change",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "INPUT",
+                "fromt": "str",
+                "to": "WHERE OrderID = INPUT",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 260,
+        "wires": [
+            [
+                "17dcb921fe15277a"
+            ]
+        ]
+    },
+    {
+        "id": "0aae1b747396cb51",
+        "type": "change",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "INPUT",
+                "fromt": "str",
+                "to": " ",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 170,
+        "y": 120,
+        "wires": [
+            [
+                "c21c3ac510b816a3"
+            ]
+        ]
+    },
+    {
+        "id": "df3c91801d9dd4b4",
+        "type": "ui_template",
+        "z": "ed3215767a63e2a1",
+        "group": "69c1a336b581922e",
+        "name": "UI Table - processes",
+        "order": 11,
+        "width": "0",
+        "height": "0",
+        "format": "<table style=\"width:100%\">\n  <tr>\n    <th>ProcessID</th>\n    <th>Process Type</th>\n    <th>OrderID</th>\n    <th>Start Time</th>\n    <th>Finish Time</th> \n    \n  </tr>\n  <tr ng-repeat=\"x in msg.payload | limitTo:20\">\n    <td>{{msg.payload[$index].ProcessID}}</td>\n    <td>{{msg.payload[$index].ProcessType}}</td>\n    <td>{{msg.payload[$index].OrderID}}</td>\n    <td>{{msg.payload[$index].StartTime}}</td>\n    <td>{{msg.payload[$index].FinishTime}}</td>\n  </tr>\n</table>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 680,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9cff7f69fe4d8db1",
+        "type": "sqlite",
+        "z": "ed3215767a63e2a1",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 450,
+        "y": 480,
+        "wires": [
+            [
+                "df3c91801d9dd4b4"
+            ]
+        ]
+    },
+    {
+        "id": "4f38743e3578ac69",
+        "type": "inject",
+        "z": "ed3215767a63e2a1",
+        "name": "View Record - processes",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "SELECT * FROM processes ORDER BY StartTime DESC;",
+        "payloadType": "date",
+        "x": 210,
+        "y": 480,
+        "wires": [
+            [
+                "9cff7f69fe4d8db1"
+            ]
+        ]
+    },
+    {
+        "id": "e9af055b5a2422d7",
+        "type": "ui_text_input",
+        "z": "ed3215767a63e2a1",
+        "name": "Search OrderID",
+        "label": "Search OrderID",
+        "tooltip": "",
+        "group": "69c1a336b581922e",
+        "order": 1,
+        "width": "16",
+        "height": "1",
+        "passthru": true,
+        "mode": "number",
+        "delay": "0",
+        "topic": "SELECT * FROM processes INPUT ORDER BY StartTime DESC;;",
+        "sendOnBlur": true,
+        "topicType": "str",
+        "x": 160,
+        "y": 720,
+        "wires": [
+            [
+                "9335e96d51bc65f2"
+            ]
+        ]
+    },
+    {
+        "id": "948504a115d3c0c0",
+        "type": "change",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "INPUT",
+                "fromt": "str",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 620,
+        "wires": [
+            [
+                "9cff7f69fe4d8db1"
+            ]
+        ]
+    },
+    {
+        "id": "9335e96d51bc65f2",
+        "type": "switch",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 210,
+        "y": 640,
+        "wires": [
+            [
+                "c099bc9105ed031d"
+            ],
+            [
+                "99cfead165c2ea79"
+            ]
+        ]
+    },
+    {
+        "id": "99cfead165c2ea79",
+        "type": "change",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "INPUT",
+                "fromt": "str",
+                "to": "WHERE OrderID = INPUT",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 680,
+        "wires": [
+            [
+                "948504a115d3c0c0"
+            ]
+        ]
+    },
+    {
+        "id": "c099bc9105ed031d",
+        "type": "change",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "INPUT",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 210,
+        "y": 540,
+        "wires": [
+            [
+                "9cff7f69fe4d8db1"
+            ]
+        ]
+    },
+    {
+        "id": "dab586b1c741e447",
+        "type": "ui_button",
+        "z": "ed3215767a63e2a1",
+        "name": "Update Table - processes",
+        "group": "69c1a336b581922e",
+        "order": 10,
+        "width": "2",
+        "height": "1",
+        "passthru": true,
+        "label": "",
+        "tooltip": "",
+        "color": "BLACK",
+        "bgcolor": "",
+        "className": "",
+        "icon": "{{'update'}}",
+        "payload": "0",
+        "payloadType": "str",
+        "topic": "SELECT * FROM processes ORDER BY StartTime DESC;",
+        "topicType": "str",
+        "x": 210,
+        "y": 420,
+        "wires": [
+            [
+                "9cff7f69fe4d8db1"
+            ]
+        ]
+    },
+    {
+        "id": "30b16cd9c0b3c610",
+        "type": "ui_button",
+        "z": "ed3215767a63e2a1",
+        "name": "Export CSV-file",
+        "group": "69c1a336b581922e",
+        "order": 10,
+        "width": "2",
+        "height": "1",
+        "passthru": true,
+        "label": "",
+        "tooltip": "Export .CSV file",
+        "color": "BLACK",
+        "bgcolor": "",
+        "className": "",
+        "icon": "{{'fa-download'}}",
+        "payload": "downloadCSV",
+        "payloadType": "str",
+        "topic": "SELECT * FROM processes ORDER BY StartTime DESC;",
+        "topicType": "str",
+        "x": 200,
+        "y": 880,
+        "wires": [
+            [
+                "48b54eba2a8dcae4",
+                "ca735144772e8206"
+            ]
+        ]
+    },
+    {
+        "id": "11b028be7b567117",
+        "type": "csv",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "sep": ",",
+        "hdrin": false,
+        "hdrout": "all",
+        "multi": "mult",
+        "ret": "\\r\\n",
+        "temp": "ProcessID,ProcessType,OrderID, StartTime,FinishTime",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": false,
+        "x": 610,
+        "y": 880,
+        "wires": [
+            [
+                "9346029063788202"
+            ]
+        ]
+    },
+    {
+        "id": "e1ac67b3ee2eff4e",
+        "type": "file",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 1260,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "48b54eba2a8dcae4",
+        "type": "sqlite",
+        "z": "ed3215767a63e2a1",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 440,
+        "y": 880,
+        "wires": [
+            [
+                "11b028be7b567117"
+            ]
+        ]
+    },
+    {
+        "id": "f659c89b0cbdde4c",
+        "type": "change",
+        "z": "ed3215767a63e2a1",
+        "d": true,
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "C:\\Users\\LAB user\\Desktop\\SIA IoT Gateway Projekt\\MES Files\\FILE_ProcessLog",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 940,
+        "wires": [
+            [
+                "b8f0678d7962f7b1"
+            ]
+        ]
+    },
+    {
+        "id": "0e549a86590452ed",
+        "type": "inject",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 980,
+        "wires": [
+            [
+                "6eeea6dffec98f71"
+            ]
+        ]
+    },
+    {
+        "id": "6eeea6dffec98f71",
+        "type": "function",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "func": "var now = new Date(msg.payload);\n\nvar now = now.getDate() + \"-\" + now.getMonth() + \"-\" + now.getFullYear() + \"_\" + now.getHours() + \"-\" + now.getMinutes() + \"-\" + now.getSeconds();\n\nflow.set(\"file_name\", now);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b8f0678d7962f7b1",
+        "type": "change",
+        "z": "ed3215767a63e2a1",
+        "d": true,
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "filename",
+                "pt": "msg",
+                "from": "FILE",
+                "fromt": "str",
+                "to": "file_name",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1040,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9346029063788202",
+        "type": "change",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "Public/ProcessLog.csv",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 880,
+        "wires": [
+            [
+                "e1ac67b3ee2eff4e"
+            ]
+        ]
+    },
+    {
+        "id": "3941ca8a6231798a",
+        "type": "ui_template",
+        "z": "ed3215767a63e2a1",
+        "group": "69c1a336b581922e",
+        "name": "window redirect",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "format": "<script>\n(function(scope) {\n    scope.$watch('msg.payload', function(data) {\n        if (data == \"downloadCSV\") {\n          //window.open(\"https://localhost:1880/data/ProcessLog.csv\");\n          window.open(\"/files/ProcessLog.csv\", \"_blank\");\n        } \n       \n    });\n})(scope);\n</script>",
+        "storeOutMessages": false,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "className": "",
+        "x": 760,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ca735144772e8206",
+        "type": "delay",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 420,
+        "y": 820,
+        "wires": [
+            [
+                "3941ca8a6231798a"
+            ]
+        ]
+    },
+    {
+        "id": "d31142f5228cbc54",
+        "type": "http response",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1170,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "4a918b3fca8f53b3",
+        "type": "http in",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "url": "/files/:fn",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 430,
+        "y": 1080,
+        "wires": [
+            [
+                "59b30d6cbd9a6f7f"
+            ]
+        ]
+    },
+    {
+        "id": "59b30d6cbd9a6f7f",
+        "type": "file in",
+        "z": "ed3215767a63e2a1",
+        "name": "",
+        "filename": "Public/ProcessLog.csv",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "utf8",
+        "allProps": false,
+        "x": 720,
+        "y": 1080,
+        "wires": [
+            [
+                "d31142f5228cbc54"
+            ]
+        ]
+    },
+    {
+        "id": "bac0e27560e10b09",
+        "type": "ui_group",
+        "name": "Orders ",
+        "tab": "2cc40c48eb6e0eec",
+        "order": 1,
+        "disp": true,
+        "width": "20",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "99c4812a67090969",
+        "type": "sqlitedb",
+        "db": ":memory:",
+        "mode": "RWC"
+    },
+    {
+        "id": "69c1a336b581922e",
+        "type": "ui_group",
+        "name": "Process Overview",
+        "tab": "2cc40c48eb6e0eec",
+        "order": 2,
+        "disp": true,
+        "width": "20",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "2cc40c48eb6e0eec",
+        "type": "ui_tab",
+        "name": "View Orders",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
