@@ -1,0 +1,31 @@
+This folder contains a back up of the flows for the SIA-Gateway Demonstrator, as implemented by ratchet11243 (RPHodgkinson) as of 27/01/2022.
+Each flow is a JSON copy of the corresponding flows, uploaded 03/02/2022. Each file contains a description of the flow's function under its extended description. 
+
+Summary:
+The device currently has a high success rate on recording process cycle times with 3 or fewer pallets circulating. Tests indicate that additional pallets circulating in the
+system reduces the success rate of these recordings. This is likely a network traffic issue, as each PLC appears to request the pallet's OrderID from the MES computer, before
+this is then requested by the Raspberry Pi, in addition to any SCADA communication between the PLCs and the MES computer (MES 4 status variables). Additional pallets increase 
+the volume of this communication, potentially leading to packet crashes - this has not been confirmed as of 03/02/2022, but should be investigated.
+
+The SIA-Connect Gateway was disconnect from the system for connectivity issues. However, it is unknown whether these issues were a symptom of the above issue, or if they 
+represent and additional connectivity problem. It has been noted that connectivity performance was better on start up than after a length of time connected, and there has been 
+mention that the OPC UA servers are limited in the number of connections that can be made before connection requests are refused.
+
+Support for the network traffic theory is that the SIA-Gateway connections were implemented with a QoS of 2, meaning 4 (4-part handshake) messages for each value subscription 
+between the SIA-Connect and the PLC, and an additional 4 messages between the SIA-Connect and the Raspberry Pi for EACH value subscription. Additional pallets in the system 
+would increase the rate of change to monitored values, and therefore traffic on the network - explaining the decrease in record success rate with higher pallet numbers in 
+cirkulation. Furthermore, there would be some overhead from MES 4's SCADA functionality (8 monitored variables per PLC - each station corresponding to 2 PLCs). Additionally, it
+is likely that the OrderID value is stored on the MES computer and polled by the Stations as needed (evidenced by how late in the process cycle this value is updated), further 
+increasing the traffic on the network. NB: none of this has been tested.
+
+Currenlty, process cycle time data is displayed via a table on the Node-RED dashboard. This data includes ProcessType (PLC station number), StartTime, FinishTime, OrderID. 
+NB: Timestamps are JS timestamps - i.e. divide by 1000 to get the unix timestamp. A .CSV-file export is available, which is exported to a file on the Raspberry Pi in the Public
+directory.
+
+Next Steps:
+- Solving the connection/record issues described above.
+- Altering or expanding the process table display to give the cycle time as a formatted time value.
+- Expanding the process time display to include a relevant cycle time KPI - potentially indicating the performance of each process instance.
+- Implementation of an andon board user interface.
+- Implementing of automatic on-click download to client computer of the .CSV-file.
+- Implement some direct access to the SQLite databse from software on another computer - e.g. the MES computer, integration with Odoo, or simillar.
