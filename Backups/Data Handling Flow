@@ -1,0 +1,4050 @@
+[
+    {
+        "id": "f560414e782b8ff4",
+        "type": "subflow",
+        "name": "STPLC_08 Triple Trigger",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 180,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "c2e0466946a14c77"
+                    },
+                    {
+                        "id": "3c1b8cbf771a5eb4"
+                    },
+                    {
+                        "id": "f5668ae2ac8da652"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 660,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "c2e0466946a14c77",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 660,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "9b98ca02d99a34c4",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 660,
+                "y": 240,
+                "wires": [
+                    {
+                        "id": "f5668ae2ac8da652",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "c2e0466946a14c77",
+        "type": "change",
+        "z": "f560414e782b8ff4",
+        "name": "SET ProcessType",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "ProcessType",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "STPLC_08",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3c1b8cbf771a5eb4",
+        "type": "trigger",
+        "z": "f560414e782b8ff4",
+        "name": "Trigger TimeStamp",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 430,
+        "y": 160,
+        "wires": [
+            [
+                "9b98ca02d99a34c4"
+            ]
+        ]
+    },
+    {
+        "id": "9b98ca02d99a34c4",
+        "type": "change",
+        "z": "f560414e782b8ff4",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "TimeStamp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f5668ae2ac8da652",
+        "type": "change",
+        "z": "f560414e782b8ff4",
+        "name": "SET xCarrierAvailable",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "xCarrierAvailable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "674f22d11d54d189",
+        "type": "subflow",
+        "name": "SQL INSERT/UPDATE logic (2)",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "33e53b63b6ea2580"
+                    },
+                    {
+                        "id": "93a521f70328adad"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 820,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "0bb48d011ea40f60",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 820,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "5043d005afca4441",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 820,
+                "y": 300,
+                "wires": [
+                    {
+                        "id": "33e53b63b6ea2580",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "389006329a69d1de",
+        "type": "switch",
+        "z": "674f22d11d54d189",
+        "name": "",
+        "property": "payload.xCarrierAvailable",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 310,
+        "y": 80,
+        "wires": [
+            [
+                "4cc8f3ee0fbdfd41"
+            ],
+            [
+                "a85f36a0762ac164"
+            ]
+        ]
+    },
+    {
+        "id": "a85f36a0762ac164",
+        "type": "change",
+        "z": "674f22d11d54d189",
+        "name": "UPDATE FinishTime",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "UPDATE processes SET FinishTime = msg.payload.TimeStamp WHERE ProcessType = 'msg.payload.ProcessType' AND OrderID = msg.payload.OrderID;",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 180,
+        "wires": [
+            [
+                "5043d005afca4441"
+            ]
+        ]
+    },
+    {
+        "id": "4cc8f3ee0fbdfd41",
+        "type": "change",
+        "z": "674f22d11d54d189",
+        "name": "INSERT ProcessType AND StartTime",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "INSERT INTO processes(ProcessType, OrderID, StartTime) values('msg.payload.ProcessType', msg.payload.OrderID, msg.payload.TimeStamp);",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 80,
+        "wires": [
+            [
+                "0bb48d011ea40f60"
+            ]
+        ]
+    },
+    {
+        "id": "33e53b63b6ea2580",
+        "type": "join",
+        "z": "674f22d11d54d189",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 190,
+        "y": 80,
+        "wires": [
+            [
+                "389006329a69d1de"
+            ]
+        ]
+    },
+    {
+        "id": "0bb48d011ea40f60",
+        "type": "change",
+        "z": "674f22d11d54d189",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "msg.payload.OrderID",
+                "fromt": "str",
+                "to": "payload.OrderID",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "msg.payload.TimeStamp",
+                "fromt": "str",
+                "to": "payload.TimeStamp",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "msg.payload.ProcessType",
+                "fromt": "str",
+                "to": "payload.ProcessType",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5043d005afca4441",
+        "type": "change",
+        "z": "674f22d11d54d189",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "msg.payload.TimeStamp",
+                "fromt": "str",
+                "to": "payload.TimeStamp",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "msg.payload.OrderID",
+                "fromt": "str",
+                "to": "payload.OrderID",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "msg.payload.ProcessType",
+                "fromt": "str",
+                "to": "payload.ProcessType",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "93a521f70328adad",
+        "type": "debug",
+        "z": "674f22d11d54d189",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "04cf0739d1421d9c",
+        "type": "subflow",
+        "name": "STPLC_12 Triple Trigger",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 240,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "433fba8f0863546c"
+                    },
+                    {
+                        "id": "6ba3bbbbb7d9be44"
+                    },
+                    {
+                        "id": "5bb56edbd55c30b2"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 660,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "433fba8f0863546c",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 660,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "9913f77f164b3f4f",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 660,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "5bb56edbd55c30b2",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "433fba8f0863546c",
+        "type": "change",
+        "z": "04cf0739d1421d9c",
+        "name": "SET ProcessType",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "ProcessType",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "STPLC_12",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6ba3bbbbb7d9be44",
+        "type": "trigger",
+        "z": "04cf0739d1421d9c",
+        "name": "Trigger TimeStamp",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "9913f77f164b3f4f"
+            ]
+        ]
+    },
+    {
+        "id": "9913f77f164b3f4f",
+        "type": "change",
+        "z": "04cf0739d1421d9c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "TimeStamp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5bb56edbd55c30b2",
+        "type": "change",
+        "z": "04cf0739d1421d9c",
+        "name": "SET xCarrierAvailable",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "xCarrierAvailable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c8a960c03869ddb6",
+        "type": "subflow",
+        "name": "STPLC_14 Switch Triple Trigger",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 260,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "7856a4abbe1e6875"
+                    },
+                    {
+                        "id": "a459a436d7476eda"
+                    },
+                    {
+                        "id": "dd46bc57b60024ba"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 740,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "7856a4abbe1e6875",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 740,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "dc081f3f34fb7e1e",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 740,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "dd46bc57b60024ba",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "7856a4abbe1e6875",
+        "type": "change",
+        "z": "c8a960c03869ddb6",
+        "name": "SET ProcessType",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "ProcessType",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "STPLC_14/Switch",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a459a436d7476eda",
+        "type": "trigger",
+        "z": "c8a960c03869ddb6",
+        "name": "Trigger TimeStamp",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 530,
+        "y": 100,
+        "wires": [
+            [
+                "dc081f3f34fb7e1e"
+            ]
+        ]
+    },
+    {
+        "id": "dc081f3f34fb7e1e",
+        "type": "change",
+        "z": "c8a960c03869ddb6",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "TimeStamp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dd46bc57b60024ba",
+        "type": "change",
+        "z": "c8a960c03869ddb6",
+        "name": "SET xCarrierAvailable",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "xCarrierAvailable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0435cba8dba77d76",
+        "type": "subflow",
+        "name": "STPLC_14 ProcessTriple Trigger",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 240,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "8678bb1d0a689bb8"
+                    },
+                    {
+                        "id": "9e676ee73657666a"
+                    },
+                    {
+                        "id": "776ea970e4e5a6b3"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 660,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "9e676ee73657666a",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 660,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "fa15372e6dbacd8b",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 660,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "776ea970e4e5a6b3",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "9e676ee73657666a",
+        "type": "change",
+        "z": "0435cba8dba77d76",
+        "name": "SET ProcessType",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "ProcessType",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "STPLC_14/Process",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8678bb1d0a689bb8",
+        "type": "trigger",
+        "z": "0435cba8dba77d76",
+        "name": "Trigger TimeStamp",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "fa15372e6dbacd8b"
+            ]
+        ]
+    },
+    {
+        "id": "fa15372e6dbacd8b",
+        "type": "change",
+        "z": "0435cba8dba77d76",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "TimeStamp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "776ea970e4e5a6b3",
+        "type": "change",
+        "z": "0435cba8dba77d76",
+        "name": "SET xCarrierAvailable",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "xCarrierAvailable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5b8b6045ef028592",
+        "type": "subflow",
+        "name": "STPLC_13 Triple Trigger",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 260,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "73aafc73856dc899"
+                    },
+                    {
+                        "id": "832feda2119a343f"
+                    },
+                    {
+                        "id": "141a6912a3f2d132"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 660,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "73aafc73856dc899",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 660,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "16dd75c14ce7a18f",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 660,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "141a6912a3f2d132",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "73aafc73856dc899",
+        "type": "change",
+        "z": "5b8b6045ef028592",
+        "name": "SET ProcessType",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "ProcessType",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "STPLC_13",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "832feda2119a343f",
+        "type": "trigger",
+        "z": "5b8b6045ef028592",
+        "name": "Trigger TimeStamp",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "16dd75c14ce7a18f"
+            ]
+        ]
+    },
+    {
+        "id": "16dd75c14ce7a18f",
+        "type": "change",
+        "z": "5b8b6045ef028592",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "TimeStamp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "141a6912a3f2d132",
+        "type": "change",
+        "z": "5b8b6045ef028592",
+        "name": "SET xCarrierAvailable",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "xCarrierAvailable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e4379abf139c4ed1",
+        "type": "subflow",
+        "name": "STPLC_11 Triple Trigger",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 240,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "dcfe98b05ecacade"
+                    },
+                    {
+                        "id": "0438d66d1b15ecc8"
+                    },
+                    {
+                        "id": "101d31816a9c2283"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 660,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "dcfe98b05ecacade",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 660,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "c11b99679ecf36b2",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 660,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "101d31816a9c2283",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "dcfe98b05ecacade",
+        "type": "change",
+        "z": "e4379abf139c4ed1",
+        "name": "SET ProcessType",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "ProcessType",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "STPLC_11",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0438d66d1b15ecc8",
+        "type": "trigger",
+        "z": "e4379abf139c4ed1",
+        "name": "Trigger TimeStamp",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "c11b99679ecf36b2"
+            ]
+        ]
+    },
+    {
+        "id": "c11b99679ecf36b2",
+        "type": "change",
+        "z": "e4379abf139c4ed1",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "TimeStamp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "101d31816a9c2283",
+        "type": "change",
+        "z": "e4379abf139c4ed1",
+        "name": "SET xCarrierAvailable",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "xCarrierAvailable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3c53a152db7e1127",
+        "type": "subflow",
+        "name": "STPLC_10 Triple Trigger",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 260,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "d96b60e753169bf8"
+                    },
+                    {
+                        "id": "89711e0ba7aa7997"
+                    },
+                    {
+                        "id": "459677824b1d3166"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 660,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "d96b60e753169bf8",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 660,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "9abe4be5420820c9",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 660,
+                "y": 200,
+                "wires": [
+                    {
+                        "id": "89711e0ba7aa7997",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "d96b60e753169bf8",
+        "type": "change",
+        "z": "3c53a152db7e1127",
+        "name": "SET ProcessType",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "ProcessType",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "STPLC_10",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "459677824b1d3166",
+        "type": "trigger",
+        "z": "3c53a152db7e1127",
+        "name": "Trigger TimeStamp",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 470,
+        "y": 140,
+        "wires": [
+            [
+                "9abe4be5420820c9"
+            ]
+        ]
+    },
+    {
+        "id": "9abe4be5420820c9",
+        "type": "change",
+        "z": "3c53a152db7e1127",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "TimeStamp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "89711e0ba7aa7997",
+        "type": "change",
+        "z": "3c53a152db7e1127",
+        "name": "SET xCarrierAvailable",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "xCarrierAvailable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0680bd824107c2c9",
+        "type": "subflow",
+        "name": "STPLC_09 Triple Trigger",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 260,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "cceaaf3c062addb2"
+                    },
+                    {
+                        "id": "ac5a132d59190ff1"
+                    },
+                    {
+                        "id": "e139dee24b0342bd"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 640,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "cceaaf3c062addb2",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 640,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "775b8cfac5ab3ffe",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 640,
+                "y": 180,
+                "wires": [
+                    {
+                        "id": "e139dee24b0342bd",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "cceaaf3c062addb2",
+        "type": "change",
+        "z": "0680bd824107c2c9",
+        "name": "SET ProcessType",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "ProcessType",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "STPLC_09",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ac5a132d59190ff1",
+        "type": "trigger",
+        "z": "0680bd824107c2c9",
+        "name": "Trigger TimeStamp",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 470,
+        "y": 120,
+        "wires": [
+            [
+                "775b8cfac5ab3ffe"
+            ]
+        ]
+    },
+    {
+        "id": "775b8cfac5ab3ffe",
+        "type": "change",
+        "z": "0680bd824107c2c9",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "TimeStamp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e139dee24b0342bd",
+        "type": "change",
+        "z": "0680bd824107c2c9",
+        "name": "SET xCarrierAvailable",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "xCarrierAvailable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "38d880428323cd3f",
+        "type": "subflow",
+        "name": "STPLC_01 Outfeed Triple Trigger",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 160,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "f0f205b4f6c0f3ca"
+                    },
+                    {
+                        "id": "5771d9152e241891"
+                    },
+                    {
+                        "id": "fc35804c6874d504"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 580,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "f0f205b4f6c0f3ca",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 580,
+                "y": 160,
+                "wires": [
+                    {
+                        "id": "0ed323afdfd873da",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 580,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "fc35804c6874d504",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "f0f205b4f6c0f3ca",
+        "type": "change",
+        "z": "38d880428323cd3f",
+        "name": "SET ProcessType",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "ProcessType",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "STPLC_01/Outfeed",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5771d9152e241891",
+        "type": "trigger",
+        "z": "38d880428323cd3f",
+        "name": "Trigger TimeStamp",
+        "op1": "",
+        "op2": "",
+        "op1type": "date",
+        "op2type": "nul",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "ms",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 370,
+        "y": 140,
+        "wires": [
+            [
+                "0ed323afdfd873da"
+            ]
+        ]
+    },
+    {
+        "id": "0ed323afdfd873da",
+        "type": "change",
+        "z": "38d880428323cd3f",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "TimeStamp",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fc35804c6874d504",
+        "type": "change",
+        "z": "38d880428323cd3f",
+        "name": "SET xCarrierAvailable",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "xCarrierAvailable",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "01b23918d5d06bbc",
+        "type": "subflow",
+        "name": "SQL INSERT/UPDATE logic",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "f6e60ba34b7875d5"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1080,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "c3e09679d2208e1d",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1080,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "cd7bcb475fe16112",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 1080,
+                "y": 300,
+                "wires": [
+                    {
+                        "id": "f6e60ba34b7875d5",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "bad4bcfb6cecea44",
+        "type": "switch",
+        "z": "01b23918d5d06bbc",
+        "name": "",
+        "property": "payload.xCarrierAvailable",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "true",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "false",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 550,
+        "y": 80,
+        "wires": [
+            [
+                "0024ae46c1bbccd4"
+            ],
+            [
+                "1075ff95708bab74"
+            ]
+        ]
+    },
+    {
+        "id": "1075ff95708bab74",
+        "type": "change",
+        "z": "01b23918d5d06bbc",
+        "name": "UPDATE FinishTime",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "UPDATE processes SET FinishTime = msg.payload.TimeStamp WHERE ProcessType = 'msg.payload.ProcessType' AND OrderID = msg.payload.OrderID;",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 180,
+        "wires": [
+            [
+                "cd7bcb475fe16112"
+            ]
+        ]
+    },
+    {
+        "id": "0024ae46c1bbccd4",
+        "type": "change",
+        "z": "01b23918d5d06bbc",
+        "name": "INSERT ProcessType AND StartTime",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "INSERT INTO processes(ProcessType, OrderID, StartTime) values('msg.payload.ProcessType', msg.payload.OrderID, msg.payload.TimeStamp);",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 810,
+        "y": 80,
+        "wires": [
+            [
+                "c3e09679d2208e1d"
+            ]
+        ]
+    },
+    {
+        "id": "f6e60ba34b7875d5",
+        "type": "join",
+        "z": "01b23918d5d06bbc",
+        "name": "",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "4",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "",
+        "reduceFixup": "",
+        "x": 190,
+        "y": 80,
+        "wires": [
+            [
+                "46b652a39592aa02"
+            ]
+        ]
+    },
+    {
+        "id": "c3e09679d2208e1d",
+        "type": "change",
+        "z": "01b23918d5d06bbc",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "msg.payload.OrderID",
+                "fromt": "str",
+                "to": "payload.OrderID",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "msg.payload.TimeStamp",
+                "fromt": "str",
+                "to": "payload.TimeStamp",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "msg.payload.ProcessType",
+                "fromt": "str",
+                "to": "payload.ProcessType",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cd7bcb475fe16112",
+        "type": "change",
+        "z": "01b23918d5d06bbc",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "msg.payload.TimeStamp",
+                "fromt": "str",
+                "to": "payload.TimeStamp",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "msg.payload.OrderID",
+                "fromt": "str",
+                "to": "payload.OrderID",
+                "tot": "msg"
+            },
+            {
+                "t": "change",
+                "p": "topic",
+                "pt": "msg",
+                "from": "msg.payload.ProcessType",
+                "fromt": "str",
+                "to": "payload.ProcessType",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 780,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "46b652a39592aa02",
+        "type": "switch",
+        "z": "01b23918d5d06bbc",
+        "name": "",
+        "property": "payload.OrderID",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 390,
+        "y": 80,
+        "wires": [
+            [
+                "bad4bcfb6cecea44"
+            ]
+        ]
+    },
+    {
+        "id": "42ac18c6d2c55fed",
+        "type": "tab",
+        "label": "Data Handling",
+        "disabled": false,
+        "info": "This Flow handles the insertion of data into an SQLite databse. \n\nxCarrierAvailable is the trigger variable. When a message containing this value is sent from the MQTT node, three message paths are followed simultaneously. \n\nPath1:\n- set msg.topic = ProcessType\n- set msg.payload = PLC-Name e.g. 'STPLC_08' (manually configured)\n\nPath2:\n- trigger Timestamp message\n- set msg.topic = TimeStamp\n\nPath3: \n- set msg.topic = xCarrierAvailable\n\nAdditionally, OrderID (udiONo) is supplied via the Order node. This message path:\n- set msg.topic = OrderID\n\nAll 4 message paths converge to a subflow, which outputs one of two message types, either an SQLite3 INSERT command, or an SQLite3 UPDATE command. These commands are implemented in the msg.topic. \n\nThe INSERT command creates a new row in the processes table stored in the SQLite database, corresponding to the ProcessType, StartTime and OrderID.\n\nThe UPDATE command adds a FinishTime to an existing row in the SQLite database, where the ProcessType and OrderID match. \n\nBoth of these message types enter the SQLite database node. Currently the database exists in :memory: and is therefore not persistent. \n\nThis is repeated for each PLC.",
+        "env": []
+    },
+    {
+        "id": "711248b05ea44fc8",
+        "type": "group",
+        "z": "42ac18c6d2c55fed",
+        "name": "STPLC_01",
+        "style": {
+            "stroke": "#ff0000",
+            "fill": "#ff7f7f",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "8a5b45730cbc7746",
+            "95c550d27c038d66",
+            "e2db7d17888d760e",
+            "efda767f36328b9b",
+            "5db2abf7d05ee574",
+            "694ce4614555b671",
+            "daa68e635622c395",
+            "653501dadd5c84ac",
+            "639c49b022106384",
+            "d671962bd085227d",
+            "395c84dc82fce2b6",
+            "b865fdfcc5de0d4b",
+            "6771f9befe8231e5",
+            "9a234bdeaf1a39d8",
+            "7f961a0094f12116",
+            "4602b003705b71a6"
+        ],
+        "env": [],
+        "x": 34,
+        "y": 31.5,
+        "w": 1092,
+        "h": 269.5
+    },
+    {
+        "id": "acab63e8fa93bf8c",
+        "type": "group",
+        "z": "42ac18c6d2c55fed",
+        "name": "STPLC_09",
+        "style": {
+            "stroke": "#ffff00",
+            "fill": "#ffff7f",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "d21dc5a08aaa5319",
+            "b40f6d3de679406d",
+            "c65cfe5f963dd901",
+            "240e247574270604",
+            "4646b95cfccded91",
+            "1343eb44ef5969a2",
+            "2b5ef03f4d6848fa",
+            "a66937a7b2144621"
+        ],
+        "env": [],
+        "x": 34,
+        "y": 471.5,
+        "w": 1092,
+        "h": 149.5
+    },
+    {
+        "id": "dc19a0dbf07baea9",
+        "type": "group",
+        "z": "42ac18c6d2c55fed",
+        "name": "STPLC_10",
+        "style": {
+            "stroke": "#92d04f",
+            "fill": "#c8e7a7",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "43079792e1e9342b",
+            "d15ada451b4ecccf",
+            "1323c36790bb20c1",
+            "ae1f19791bd47453",
+            "195aaa2a61d80fe2",
+            "42f333285bf832e3",
+            "539ae9297a1a774b",
+            "5de760eaff0a08e5"
+        ],
+        "env": [],
+        "x": 34,
+        "y": 631.5,
+        "w": 1092,
+        "h": 149.5
+    },
+    {
+        "id": "14ebc6e5e4d8d2f8",
+        "type": "group",
+        "z": "42ac18c6d2c55fed",
+        "name": "STPLC_11",
+        "style": {
+            "stroke": "#0070c0",
+            "fill": "#7fb7df",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "5b28abb30c07155b",
+            "2fceabe23f96f467",
+            "91d136e6191cc11c",
+            "e82026916c7f12b5",
+            "ce1fb38423ae89b3",
+            "de3917b6c40533cf",
+            "316bc76aa6e74287",
+            "d8aa3f9e1025207d"
+        ],
+        "env": [],
+        "x": 34,
+        "y": 791.5,
+        "w": 1092,
+        "h": 149.5
+    },
+    {
+        "id": "680d32f67c96ed18",
+        "type": "group",
+        "z": "42ac18c6d2c55fed",
+        "name": "STPLC_13",
+        "style": {
+            "stroke": "#6f2fa0",
+            "fill": "#b797cf",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "2c4193d93d08f392",
+            "ad162e67891162d3",
+            "a19920a73483c46b",
+            "be21e4a2e6472446",
+            "7959c5cec519765a",
+            "e0bf1d37169c8aa8",
+            "c94484ca196ac629",
+            "be2f81c5ed2a7667"
+        ],
+        "env": [],
+        "x": 34,
+        "y": 1111.5,
+        "w": 1092,
+        "h": 149.5
+    },
+    {
+        "id": "5da7214101029038",
+        "type": "group",
+        "z": "42ac18c6d2c55fed",
+        "name": "STPLC_14",
+        "style": {
+            "stroke": "#000000",
+            "fill": "#7f7f7f",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "db7f8b688bb73343",
+            "7b7922db1dda86ad",
+            "ec3245b282e0bcba",
+            "08515977f387ca6d",
+            "2e773c577e177fb7",
+            "fb75816de01f1dc8",
+            "37c9661ca8b0d765",
+            "a1974b24c84ebf5f",
+            "4e6c2bdeb15faeba",
+            "ecc37fb1e9f75b73",
+            "8bc8f1645a88407e",
+            "27b6e39ddb278b47",
+            "ada4b754bd888b1c",
+            "d0a43782c859bc7a",
+            "b60ec9a14f8f9540",
+            "acfffa897ac1cd25"
+        ],
+        "env": [],
+        "x": 34,
+        "y": 1271.5,
+        "w": 1092,
+        "h": 269.5
+    },
+    {
+        "id": "6cc38ef429feae23",
+        "type": "group",
+        "z": "42ac18c6d2c55fed",
+        "name": "STPLC_12",
+        "style": {
+            "stroke": "#001f60",
+            "fill": "#7f8faf",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "9e224b4260951e29",
+            "4ba1c71401df81d6",
+            "c4a264c4558d0a5b",
+            "446b88a38e34777b",
+            "90f88e4481fc52e9",
+            "6e6a1f49d385ab33",
+            "93a07e784733acbe",
+            "5eef51630e82df0f"
+        ],
+        "env": [],
+        "x": 34,
+        "y": 951.5,
+        "w": 1092,
+        "h": 149.5
+    },
+    {
+        "id": "27fe56fec587a2d1",
+        "type": "group",
+        "z": "42ac18c6d2c55fed",
+        "name": "STPLC_08",
+        "style": {
+            "stroke": "#ffC000",
+            "fill": "#ffdf7f",
+            "label": true,
+            "color": "#000000"
+        },
+        "nodes": [
+            "58d4990d5ecb190d",
+            "8bf11a7815459bef",
+            "4424ae2609a9d826",
+            "9c510f5a63f59ee7",
+            "cc6da392c7175743",
+            "65c0844f80ae9c5c",
+            "6816f2fe3626fa3c",
+            "5fa64eb754b422a7",
+            "f88a469a32961279"
+        ],
+        "env": [],
+        "x": 34,
+        "y": 311.5,
+        "w": 1092,
+        "h": 149.5
+    },
+    {
+        "id": "8a5b45730cbc7746",
+        "type": "sqlite",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1040,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "95c550d27c038d66",
+        "type": "change",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "SET OrderID",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "OrderID",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 140,
+        "wires": [
+            [
+                "e2db7d17888d760e"
+            ]
+        ]
+    },
+    {
+        "id": "e2db7d17888d760e",
+        "type": "subflow:01b23918d5d06bbc",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "",
+        "env": [],
+        "x": 840,
+        "y": 80,
+        "wires": [
+            [
+                "8a5b45730cbc7746"
+            ],
+            [
+                "8a5b45730cbc7746"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "d21dc5a08aaa5319",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "acab63e8fa93bf8c",
+        "name": "",
+        "topic": "STPLC_09/udiONo",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 430,
+        "y": 580,
+        "wires": [
+            [
+                "b40f6d3de679406d"
+            ]
+        ]
+    },
+    {
+        "id": "b40f6d3de679406d",
+        "type": "change",
+        "z": "42ac18c6d2c55fed",
+        "g": "acab63e8fa93bf8c",
+        "name": "SET OrderID",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "OrderID",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 580,
+        "wires": [
+            [
+                "240e247574270604"
+            ]
+        ]
+    },
+    {
+        "id": "c65cfe5f963dd901",
+        "type": "sqlite",
+        "z": "42ac18c6d2c55fed",
+        "g": "acab63e8fa93bf8c",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1040,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "240e247574270604",
+        "type": "subflow:01b23918d5d06bbc",
+        "z": "42ac18c6d2c55fed",
+        "g": "acab63e8fa93bf8c",
+        "name": "",
+        "env": [],
+        "x": 840,
+        "y": 520,
+        "wires": [
+            [
+                "c65cfe5f963dd901"
+            ],
+            [
+                "c65cfe5f963dd901"
+            ],
+            [
+                "4b41d67b64e1bdc2"
+            ]
+        ]
+    },
+    {
+        "id": "43079792e1e9342b",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "dc19a0dbf07baea9",
+        "name": "",
+        "topic": "STPLC_10/udiONo",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 430,
+        "y": 740,
+        "wires": [
+            [
+                "1323c36790bb20c1"
+            ]
+        ]
+    },
+    {
+        "id": "d15ada451b4ecccf",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "dc19a0dbf07baea9",
+        "name": "",
+        "topic": "STPLC_10/xCarrierAvailable",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 680,
+        "wires": [
+            [
+                "42f333285bf832e3",
+                "5de760eaff0a08e5"
+            ]
+        ]
+    },
+    {
+        "id": "1323c36790bb20c1",
+        "type": "change",
+        "z": "42ac18c6d2c55fed",
+        "g": "dc19a0dbf07baea9",
+        "name": "SET OrderID",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "OrderID",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 740,
+        "wires": [
+            [
+                "195aaa2a61d80fe2"
+            ]
+        ]
+    },
+    {
+        "id": "ae1f19791bd47453",
+        "type": "sqlite",
+        "z": "42ac18c6d2c55fed",
+        "g": "dc19a0dbf07baea9",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1040,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "195aaa2a61d80fe2",
+        "type": "subflow:01b23918d5d06bbc",
+        "z": "42ac18c6d2c55fed",
+        "g": "dc19a0dbf07baea9",
+        "name": "",
+        "env": [],
+        "x": 840,
+        "y": 680,
+        "wires": [
+            [
+                "ae1f19791bd47453"
+            ],
+            [
+                "ae1f19791bd47453"
+            ],
+            [
+                "4b41d67b64e1bdc2"
+            ]
+        ]
+    },
+    {
+        "id": "5b28abb30c07155b",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "14ebc6e5e4d8d2f8",
+        "name": "",
+        "topic": "STPLC_11/udiONo",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 430,
+        "y": 900,
+        "wires": [
+            [
+                "2fceabe23f96f467"
+            ]
+        ]
+    },
+    {
+        "id": "2fceabe23f96f467",
+        "type": "change",
+        "z": "42ac18c6d2c55fed",
+        "g": "14ebc6e5e4d8d2f8",
+        "name": "SET OrderID",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "OrderID",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 900,
+        "wires": [
+            [
+                "e82026916c7f12b5"
+            ]
+        ]
+    },
+    {
+        "id": "91d136e6191cc11c",
+        "type": "sqlite",
+        "z": "42ac18c6d2c55fed",
+        "g": "14ebc6e5e4d8d2f8",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1040,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e82026916c7f12b5",
+        "type": "subflow:01b23918d5d06bbc",
+        "z": "42ac18c6d2c55fed",
+        "g": "14ebc6e5e4d8d2f8",
+        "name": "",
+        "env": [],
+        "x": 840,
+        "y": 840,
+        "wires": [
+            [
+                "91d136e6191cc11c"
+            ],
+            [
+                "91d136e6191cc11c"
+            ],
+            [
+                "4b41d67b64e1bdc2"
+            ]
+        ]
+    },
+    {
+        "id": "2c4193d93d08f392",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "680d32f67c96ed18",
+        "name": "",
+        "topic": "STPLC_13/udiONo",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 430,
+        "y": 1220,
+        "wires": [
+            [
+                "ad162e67891162d3"
+            ]
+        ]
+    },
+    {
+        "id": "ad162e67891162d3",
+        "type": "change",
+        "z": "42ac18c6d2c55fed",
+        "g": "680d32f67c96ed18",
+        "name": "SET OrderID",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "OrderID",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 1220,
+        "wires": [
+            [
+                "be21e4a2e6472446"
+            ]
+        ]
+    },
+    {
+        "id": "a19920a73483c46b",
+        "type": "sqlite",
+        "z": "42ac18c6d2c55fed",
+        "g": "680d32f67c96ed18",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1040,
+        "y": 1160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "be21e4a2e6472446",
+        "type": "subflow:01b23918d5d06bbc",
+        "z": "42ac18c6d2c55fed",
+        "g": "680d32f67c96ed18",
+        "name": "",
+        "env": [],
+        "x": 840,
+        "y": 1160,
+        "wires": [
+            [
+                "a19920a73483c46b"
+            ],
+            [
+                "a19920a73483c46b"
+            ],
+            [
+                "4b41d67b64e1bdc2"
+            ]
+        ]
+    },
+    {
+        "id": "db7f8b688bb73343",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "",
+        "topic": "STPLC_14/Switch/udiONo",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 410,
+        "y": 1380,
+        "wires": [
+            [
+                "7b7922db1dda86ad"
+            ]
+        ]
+    },
+    {
+        "id": "7b7922db1dda86ad",
+        "type": "change",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "SET OrderID",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "OrderID",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 1380,
+        "wires": [
+            [
+                "08515977f387ca6d"
+            ]
+        ]
+    },
+    {
+        "id": "ec3245b282e0bcba",
+        "type": "sqlite",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1040,
+        "y": 1320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "08515977f387ca6d",
+        "type": "subflow:01b23918d5d06bbc",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "",
+        "env": [],
+        "x": 840,
+        "y": 1320,
+        "wires": [
+            [
+                "ec3245b282e0bcba"
+            ],
+            [
+                "ec3245b282e0bcba"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "efda767f36328b9b",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "",
+        "topic": "STPLC_01/Switch/xCarrierAvailable",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "694ce4614555b671",
+                "7f961a0094f12116"
+            ]
+        ]
+    },
+    {
+        "id": "5db2abf7d05ee574",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "",
+        "topic": "STPLC_01/Switch/OrderID",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 410,
+        "y": 140,
+        "wires": [
+            [
+                "95c550d27c038d66"
+            ]
+        ]
+    },
+    {
+        "id": "694ce4614555b671",
+        "type": "subflow:38d880428323cd3f",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "",
+        "x": 540,
+        "y": 80,
+        "wires": [
+            [
+                "e2db7d17888d760e"
+            ],
+            [
+                "e2db7d17888d760e"
+            ],
+            [
+                "e2db7d17888d760e"
+            ]
+        ]
+    },
+    {
+        "id": "daa68e635622c395",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "",
+        "topic": "STPLC_01/Outfeed/xCarrierAvailable",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "d671962bd085227d",
+                "4602b003705b71a6"
+            ]
+        ]
+    },
+    {
+        "id": "653501dadd5c84ac",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "",
+        "topic": "STPLC_01/Outfeed/OrderID",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 400,
+        "y": 260,
+        "wires": [
+            [
+                "639c49b022106384"
+            ]
+        ]
+    },
+    {
+        "id": "639c49b022106384",
+        "type": "change",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "SET OrderID",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "OrderID",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 260,
+        "wires": [
+            [
+                "395c84dc82fce2b6"
+            ]
+        ]
+    },
+    {
+        "id": "d671962bd085227d",
+        "type": "subflow:38d880428323cd3f",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "",
+        "env": [],
+        "x": 540,
+        "y": 200,
+        "wires": [
+            [
+                "395c84dc82fce2b6"
+            ],
+            [
+                "395c84dc82fce2b6"
+            ],
+            [
+                "395c84dc82fce2b6"
+            ]
+        ]
+    },
+    {
+        "id": "395c84dc82fce2b6",
+        "type": "subflow:01b23918d5d06bbc",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "",
+        "env": [],
+        "x": 840,
+        "y": 200,
+        "wires": [
+            [
+                "b865fdfcc5de0d4b"
+            ],
+            [
+                "b865fdfcc5de0d4b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b865fdfcc5de0d4b",
+        "type": "sqlite",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1040,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4646b95cfccded91",
+        "type": "subflow:0680bd824107c2c9",
+        "z": "42ac18c6d2c55fed",
+        "g": "acab63e8fa93bf8c",
+        "name": "",
+        "env": [],
+        "x": 530,
+        "y": 520,
+        "wires": [
+            [
+                "240e247574270604"
+            ],
+            [
+                "240e247574270604"
+            ],
+            [
+                "240e247574270604"
+            ]
+        ]
+    },
+    {
+        "id": "1343eb44ef5969a2",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "acab63e8fa93bf8c",
+        "name": "",
+        "topic": "STPLC_09/xCarrierAvailable",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 520,
+        "wires": [
+            [
+                "4646b95cfccded91",
+                "a66937a7b2144621"
+            ]
+        ]
+    },
+    {
+        "id": "42f333285bf832e3",
+        "type": "subflow:3c53a152db7e1127",
+        "z": "42ac18c6d2c55fed",
+        "g": "dc19a0dbf07baea9",
+        "name": "",
+        "x": 530,
+        "y": 680,
+        "wires": [
+            [
+                "195aaa2a61d80fe2"
+            ],
+            [
+                "195aaa2a61d80fe2"
+            ],
+            [
+                "195aaa2a61d80fe2"
+            ]
+        ]
+    },
+    {
+        "id": "ce1fb38423ae89b3",
+        "type": "subflow:e4379abf139c4ed1",
+        "z": "42ac18c6d2c55fed",
+        "g": "14ebc6e5e4d8d2f8",
+        "name": "",
+        "env": [],
+        "x": 530,
+        "y": 840,
+        "wires": [
+            [
+                "e82026916c7f12b5"
+            ],
+            [
+                "e82026916c7f12b5"
+            ],
+            [
+                "e82026916c7f12b5"
+            ]
+        ]
+    },
+    {
+        "id": "de3917b6c40533cf",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "14ebc6e5e4d8d2f8",
+        "name": "",
+        "topic": "STPLC_11/xCarrierAvailable",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 840,
+        "wires": [
+            [
+                "ce1fb38423ae89b3",
+                "d8aa3f9e1025207d"
+            ]
+        ]
+    },
+    {
+        "id": "7959c5cec519765a",
+        "type": "subflow:5b8b6045ef028592",
+        "z": "42ac18c6d2c55fed",
+        "g": "680d32f67c96ed18",
+        "name": "",
+        "env": [],
+        "x": 530,
+        "y": 1160,
+        "wires": [
+            [
+                "be21e4a2e6472446"
+            ],
+            [
+                "be21e4a2e6472446"
+            ],
+            [
+                "be21e4a2e6472446"
+            ]
+        ]
+    },
+    {
+        "id": "e0bf1d37169c8aa8",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "680d32f67c96ed18",
+        "name": "",
+        "topic": "STPLC_13/xCarrierAvailable",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 1160,
+        "wires": [
+            [
+                "7959c5cec519765a",
+                "be2f81c5ed2a7667"
+            ]
+        ]
+    },
+    {
+        "id": "2e773c577e177fb7",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "",
+        "topic": "STPLC_14/Switch/xCarrierAvailable",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 1320,
+        "wires": [
+            [
+                "27b6e39ddb278b47",
+                "b60ec9a14f8f9540"
+            ]
+        ]
+    },
+    {
+        "id": "fb75816de01f1dc8",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "",
+        "topic": "STPLC_14/Process/udiONo",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 400,
+        "y": 1500,
+        "wires": [
+            [
+                "37c9661ca8b0d765"
+            ]
+        ]
+    },
+    {
+        "id": "37c9661ca8b0d765",
+        "type": "change",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "SET OrderID",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "OrderID",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 1500,
+        "wires": [
+            [
+                "4e6c2bdeb15faeba"
+            ]
+        ]
+    },
+    {
+        "id": "a1974b24c84ebf5f",
+        "type": "sqlite",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1040,
+        "y": 1440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4e6c2bdeb15faeba",
+        "type": "subflow:01b23918d5d06bbc",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "",
+        "env": [],
+        "x": 840,
+        "y": 1440,
+        "wires": [
+            [
+                "a1974b24c84ebf5f"
+            ],
+            [
+                "a1974b24c84ebf5f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "ecc37fb1e9f75b73",
+        "type": "subflow:0435cba8dba77d76",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "",
+        "env": [],
+        "x": 540,
+        "y": 1440,
+        "wires": [
+            [
+                "4e6c2bdeb15faeba"
+            ],
+            [
+                "4e6c2bdeb15faeba"
+            ],
+            [
+                "4e6c2bdeb15faeba"
+            ]
+        ]
+    },
+    {
+        "id": "8bc8f1645a88407e",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "",
+        "topic": "STPLC_14/Process/xCarrierAvailable",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 210,
+        "y": 1440,
+        "wires": [
+            [
+                "ecc37fb1e9f75b73",
+                "acfffa897ac1cd25"
+            ]
+        ]
+    },
+    {
+        "id": "27b6e39ddb278b47",
+        "type": "subflow:c8a960c03869ddb6",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "",
+        "x": 550,
+        "y": 1320,
+        "wires": [
+            [
+                "08515977f387ca6d"
+            ],
+            [
+                "08515977f387ca6d"
+            ],
+            [
+                "08515977f387ca6d"
+            ]
+        ]
+    },
+    {
+        "id": "6771f9befe8231e5",
+        "type": "link out",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "a61a8f83f0618ff9"
+        ],
+        "x": 255,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "9a234bdeaf1a39d8",
+        "type": "link out",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "a61a8f83f0618ff9"
+        ],
+        "x": 255,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "2b5ef03f4d6848fa",
+        "type": "link out",
+        "z": "42ac18c6d2c55fed",
+        "g": "acab63e8fa93bf8c",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "a8d7e8d60ed2f63f"
+        ],
+        "x": 255,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "539ae9297a1a774b",
+        "type": "link out",
+        "z": "42ac18c6d2c55fed",
+        "g": "dc19a0dbf07baea9",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "d6e3f01c7470ca80"
+        ],
+        "x": 255,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "316bc76aa6e74287",
+        "type": "link out",
+        "z": "42ac18c6d2c55fed",
+        "g": "14ebc6e5e4d8d2f8",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "9248de6c6698d227"
+        ],
+        "x": 255,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "c94484ca196ac629",
+        "type": "link out",
+        "z": "42ac18c6d2c55fed",
+        "g": "680d32f67c96ed18",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "5a943c7389a830d4"
+        ],
+        "x": 255,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "ada4b754bd888b1c",
+        "type": "link out",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "6749c3c8d3cd0d50"
+        ],
+        "x": 255,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "d0a43782c859bc7a",
+        "type": "link out",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "6749c3c8d3cd0d50"
+        ],
+        "x": 255,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "7f961a0094f12116",
+        "type": "delay",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "9a234bdeaf1a39d8"
+            ]
+        ]
+    },
+    {
+        "id": "4602b003705b71a6",
+        "type": "delay",
+        "z": "42ac18c6d2c55fed",
+        "g": "711248b05ea44fc8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "6771f9befe8231e5"
+            ]
+        ]
+    },
+    {
+        "id": "a66937a7b2144621",
+        "type": "delay",
+        "z": "42ac18c6d2c55fed",
+        "g": "acab63e8fa93bf8c",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "450",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 150,
+        "y": 580,
+        "wires": [
+            [
+                "2b5ef03f4d6848fa"
+            ]
+        ]
+    },
+    {
+        "id": "5de760eaff0a08e5",
+        "type": "delay",
+        "z": "42ac18c6d2c55fed",
+        "g": "dc19a0dbf07baea9",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "450",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 150,
+        "y": 740,
+        "wires": [
+            [
+                "539ae9297a1a774b"
+            ]
+        ]
+    },
+    {
+        "id": "d8aa3f9e1025207d",
+        "type": "delay",
+        "z": "42ac18c6d2c55fed",
+        "g": "14ebc6e5e4d8d2f8",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "450",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 150,
+        "y": 900,
+        "wires": [
+            [
+                "316bc76aa6e74287"
+            ]
+        ]
+    },
+    {
+        "id": "9e224b4260951e29",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "6cc38ef429feae23",
+        "name": "",
+        "topic": "STPLC_12/udiONo",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 430,
+        "y": 1060,
+        "wires": [
+            [
+                "4ba1c71401df81d6"
+            ]
+        ]
+    },
+    {
+        "id": "4ba1c71401df81d6",
+        "type": "change",
+        "z": "42ac18c6d2c55fed",
+        "g": "6cc38ef429feae23",
+        "name": "SET OrderID",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "OrderID",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 1060,
+        "wires": [
+            [
+                "446b88a38e34777b"
+            ]
+        ]
+    },
+    {
+        "id": "c4a264c4558d0a5b",
+        "type": "sqlite",
+        "z": "42ac18c6d2c55fed",
+        "g": "6cc38ef429feae23",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1040,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "446b88a38e34777b",
+        "type": "subflow:01b23918d5d06bbc",
+        "z": "42ac18c6d2c55fed",
+        "g": "6cc38ef429feae23",
+        "name": "",
+        "env": [],
+        "x": 840,
+        "y": 1000,
+        "wires": [
+            [
+                "c4a264c4558d0a5b"
+            ],
+            [
+                "c4a264c4558d0a5b"
+            ],
+            [
+                "4b41d67b64e1bdc2"
+            ]
+        ]
+    },
+    {
+        "id": "90f88e4481fc52e9",
+        "type": "subflow:04cf0739d1421d9c",
+        "z": "42ac18c6d2c55fed",
+        "g": "6cc38ef429feae23",
+        "name": "",
+        "env": [],
+        "x": 530,
+        "y": 1000,
+        "wires": [
+            [
+                "446b88a38e34777b"
+            ],
+            [
+                "446b88a38e34777b"
+            ],
+            [
+                "446b88a38e34777b"
+            ]
+        ]
+    },
+    {
+        "id": "6e6a1f49d385ab33",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "6cc38ef429feae23",
+        "name": "",
+        "topic": "STPLC_12/xCarrierAvailable",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 1000,
+        "wires": [
+            [
+                "90f88e4481fc52e9",
+                "5eef51630e82df0f"
+            ]
+        ]
+    },
+    {
+        "id": "93a07e784733acbe",
+        "type": "link out",
+        "z": "42ac18c6d2c55fed",
+        "g": "6cc38ef429feae23",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "d69368445cc679a4"
+        ],
+        "x": 255,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "5eef51630e82df0f",
+        "type": "delay",
+        "z": "42ac18c6d2c55fed",
+        "g": "6cc38ef429feae23",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "450",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 150,
+        "y": 1060,
+        "wires": [
+            [
+                "93a07e784733acbe"
+            ]
+        ]
+    },
+    {
+        "id": "be2f81c5ed2a7667",
+        "type": "delay",
+        "z": "42ac18c6d2c55fed",
+        "g": "680d32f67c96ed18",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "450",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 150,
+        "y": 1220,
+        "wires": [
+            [
+                "c94484ca196ac629"
+            ]
+        ]
+    },
+    {
+        "id": "b60ec9a14f8f9540",
+        "type": "delay",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 150,
+        "y": 1380,
+        "wires": [
+            [
+                "ada4b754bd888b1c"
+            ]
+        ]
+    },
+    {
+        "id": "acfffa897ac1cd25",
+        "type": "delay",
+        "z": "42ac18c6d2c55fed",
+        "g": "5da7214101029038",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 150,
+        "y": 1500,
+        "wires": [
+            [
+                "d0a43782c859bc7a"
+            ]
+        ]
+    },
+    {
+        "id": "4b41d67b64e1bdc2",
+        "type": "debug",
+        "z": "42ac18c6d2c55fed",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1290,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "58d4990d5ecb190d",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "27fe56fec587a2d1",
+        "name": "",
+        "topic": "STPLC_08/xCarrierAvailable",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 360,
+        "wires": [
+            [
+                "cc6da392c7175743",
+                "5fa64eb754b422a7"
+            ]
+        ]
+    },
+    {
+        "id": "8bf11a7815459bef",
+        "type": "change",
+        "z": "42ac18c6d2c55fed",
+        "g": "27fe56fec587a2d1",
+        "name": "SET OrderID",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "OrderID",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 420,
+        "wires": [
+            [
+                "9c510f5a63f59ee7"
+            ]
+        ]
+    },
+    {
+        "id": "4424ae2609a9d826",
+        "type": "sqlite",
+        "z": "42ac18c6d2c55fed",
+        "g": "27fe56fec587a2d1",
+        "mydb": "99c4812a67090969",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1040,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9c510f5a63f59ee7",
+        "type": "subflow:674f22d11d54d189",
+        "z": "42ac18c6d2c55fed",
+        "g": "27fe56fec587a2d1",
+        "name": "",
+        "env": [],
+        "x": 800,
+        "y": 360,
+        "wires": [
+            [
+                "4424ae2609a9d826"
+            ],
+            [
+                "4424ae2609a9d826"
+            ],
+            [
+                "4b41d67b64e1bdc2"
+            ]
+        ]
+    },
+    {
+        "id": "cc6da392c7175743",
+        "type": "subflow:f560414e782b8ff4",
+        "z": "42ac18c6d2c55fed",
+        "g": "27fe56fec587a2d1",
+        "name": "",
+        "env": [],
+        "x": 470,
+        "y": 360,
+        "wires": [
+            [
+                "9c510f5a63f59ee7"
+            ],
+            [
+                "9c510f5a63f59ee7"
+            ],
+            [
+                "9c510f5a63f59ee7"
+            ]
+        ]
+    },
+    {
+        "id": "65c0844f80ae9c5c",
+        "type": "mqtt in",
+        "z": "42ac18c6d2c55fed",
+        "g": "27fe56fec587a2d1",
+        "name": "",
+        "topic": "STPLC_08/udiONo",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4294edfdd5d9b1bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 450,
+        "y": 420,
+        "wires": [
+            [
+                "f88a469a32961279"
+            ]
+        ]
+    },
+    {
+        "id": "6816f2fe3626fa3c",
+        "type": "link out",
+        "z": "42ac18c6d2c55fed",
+        "g": "27fe56fec587a2d1",
+        "name": "",
+        "mode": "link",
+        "links": [
+            "d6c0f6bcffb58831"
+        ],
+        "x": 255,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "5fa64eb754b422a7",
+        "type": "delay",
+        "z": "42ac18c6d2c55fed",
+        "g": "27fe56fec587a2d1",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "450",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 140,
+        "y": 420,
+        "wires": [
+            [
+                "6816f2fe3626fa3c"
+            ]
+        ]
+    },
+    {
+        "id": "f88a469a32961279",
+        "type": "function",
+        "z": "42ac18c6d2c55fed",
+        "g": "27fe56fec587a2d1",
+        "name": "Store OrderID",
+        "func": "var ordernumber = flow.get(\"ordernumber\")\n\nif (msg.payload == 0)\n{\n    msg.payload = ordernumber;\n    flow.set(\"ordernumber\", 0);\n} else {\n    \n    flow.set(\"ordernumber\", msg.payload);\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 420,
+        "wires": [
+            [
+                "8bf11a7815459bef"
+            ]
+        ]
+    },
+    {
+        "id": "99c4812a67090969",
+        "type": "sqlitedb",
+        "db": ":memory:",
+        "mode": "RWC"
+    },
+    {
+        "id": "4294edfdd5d9b1bd",
+        "type": "mqtt-broker",
+        "name": "Broker",
+        "broker": "172.20.66.150",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]
