@@ -1,0 +1,2871 @@
+[
+    {
+        "id": "2da7505b1656b7e2",
+        "type": "subflow",
+        "name": "STPLC_13 Server (2)",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 120,
+                "y": 420,
+                "wires": [
+                    {
+                        "id": "8aac86acfeebe939"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "e256180d2d9ec2e3",
+        "type": "OpcUa-Item",
+        "z": "2da7505b1656b7e2",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "xCarrierAvailable",
+        "x": 390,
+        "y": 160,
+        "wires": [
+            [
+                "a7152289790d4b80"
+            ]
+        ]
+    },
+    {
+        "id": "a7152289790d4b80",
+        "type": "OpcUa-Client",
+        "z": "2da7505b1656b7e2",
+        "endpoint": "92fc0f16edeef3c8",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_13/Subscribe",
+        "x": 620,
+        "y": 200,
+        "wires": [
+            [
+                "2d6a7e9386bec0b7"
+            ]
+        ]
+    },
+    {
+        "id": "8aac86acfeebe939",
+        "type": "OpcUa-Item",
+        "z": "2da7505b1656b7e2",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+        "datatype": "Int32",
+        "value": "",
+        "name": "OrderID",
+        "x": 300,
+        "y": 420,
+        "wires": [
+            [
+                "506bebf98c4782d2"
+            ]
+        ]
+    },
+    {
+        "id": "f2c7a5b845bd42e3",
+        "type": "OpcUa-Item",
+        "z": "2da7505b1656b7e2",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+        "datatype": "Int8",
+        "value": "",
+        "name": "CarrierID",
+        "x": 420,
+        "y": 240,
+        "wires": [
+            [
+                "a7152289790d4b80"
+            ]
+        ]
+    },
+    {
+        "id": "2d6a7e9386bec0b7",
+        "type": "switch",
+        "z": "2da7505b1656b7e2",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "subscriptionId",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 790,
+        "y": 200,
+        "wires": [
+            [
+                "58514c33fd87fbeb"
+            ],
+            [
+                "2425df0817a29610"
+            ],
+            [
+                "589d9bbbe47d1f89"
+            ],
+            [
+                "800d68791e7f5c9d"
+            ]
+        ]
+    },
+    {
+        "id": "58514c33fd87fbeb",
+        "type": "mqtt out",
+        "z": "2da7505b1656b7e2",
+        "name": "",
+        "topic": "STPLC_13/xCarrierAvailable",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1020,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "2425df0817a29610",
+        "type": "mqtt out",
+        "z": "2da7505b1656b7e2",
+        "name": "",
+        "topic": "STPLC_13/udiONo",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 990,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "589d9bbbe47d1f89",
+        "type": "mqtt out",
+        "z": "2da7505b1656b7e2",
+        "name": "",
+        "topic": "STPLC_13/uiCarrierId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1000,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "800d68791e7f5c9d",
+        "type": "mqtt out",
+        "z": "2da7505b1656b7e2",
+        "name": "",
+        "topic": "STPLC_13/subscriptionId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1010,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "00100e56b7df5fec",
+        "type": "inject",
+        "z": "2da7505b1656b7e2",
+        "name": "Initialiser",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 120,
+        "y": 220,
+        "wires": [
+            [
+                "e256180d2d9ec2e3",
+                "f2c7a5b845bd42e3"
+            ]
+        ]
+    },
+    {
+        "id": "506bebf98c4782d2",
+        "type": "OpcUa-Client",
+        "z": "2da7505b1656b7e2",
+        "endpoint": "92fc0f16edeef3c8",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_13/Subscribe",
+        "x": 600,
+        "y": 420,
+        "wires": [
+            [
+                "2d6a7e9386bec0b7"
+            ]
+        ]
+    },
+    {
+        "id": "92fc0f16edeef3c8",
+        "type": "OpcUa-Endpoint",
+        "z": "2da7505b1656b7e2",
+        "endpoint": "opc.tcp://172.20.5.1:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "login": false
+    },
+    {
+        "id": "7c2d6a116eedd0fb",
+        "type": "subflow",
+        "name": "STPLC_12 Server",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 100,
+                "y": 300,
+                "wires": [
+                    {
+                        "id": "137d850f01fea595"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "c23634633c040ce8",
+        "type": "OpcUa-Item",
+        "z": "7c2d6a116eedd0fb",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "xCarrierAvailable",
+        "x": 290,
+        "y": 140,
+        "wires": [
+            [
+                "136cbd2e19dfcd53"
+            ]
+        ]
+    },
+    {
+        "id": "136cbd2e19dfcd53",
+        "type": "OpcUa-Client",
+        "z": "7c2d6a116eedd0fb",
+        "endpoint": "c1b72429877ea2e1",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_12/Subscribe",
+        "x": 520,
+        "y": 180,
+        "wires": [
+            [
+                "76d89bda73046c6f"
+            ]
+        ]
+    },
+    {
+        "id": "137d850f01fea595",
+        "type": "OpcUa-Item",
+        "z": "7c2d6a116eedd0fb",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+        "datatype": "Int32",
+        "value": "",
+        "name": "OrderID",
+        "x": 260,
+        "y": 300,
+        "wires": [
+            [
+                "f30d6701a9cd6a0c"
+            ]
+        ]
+    },
+    {
+        "id": "00cde47859c196ab",
+        "type": "OpcUa-Item",
+        "z": "7c2d6a116eedd0fb",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+        "datatype": "Int8",
+        "value": "",
+        "name": "CarrierID",
+        "x": 320,
+        "y": 220,
+        "wires": [
+            [
+                "136cbd2e19dfcd53"
+            ]
+        ]
+    },
+    {
+        "id": "76d89bda73046c6f",
+        "type": "switch",
+        "z": "7c2d6a116eedd0fb",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "subscriptionId",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 690,
+        "y": 180,
+        "wires": [
+            [
+                "be132de24c1b668d"
+            ],
+            [
+                "5612e0dc5ad35c30"
+            ],
+            [
+                "0471940085e145d5"
+            ],
+            [
+                "a21cbb41edd5826a"
+            ]
+        ]
+    },
+    {
+        "id": "be132de24c1b668d",
+        "type": "mqtt out",
+        "z": "7c2d6a116eedd0fb",
+        "name": "",
+        "topic": "STPLC_12/xCarrierAvailable",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 920,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "5612e0dc5ad35c30",
+        "type": "mqtt out",
+        "z": "7c2d6a116eedd0fb",
+        "name": "",
+        "topic": "STPLC_12/udiONo",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 890,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "0471940085e145d5",
+        "type": "mqtt out",
+        "z": "7c2d6a116eedd0fb",
+        "name": "",
+        "topic": "STPLC_12/uiCarrierId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 900,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a21cbb41edd5826a",
+        "type": "mqtt out",
+        "z": "7c2d6a116eedd0fb",
+        "name": "",
+        "topic": "STPLC_12/subscriptionId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 910,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "5d2b981d8b38ced1",
+        "type": "inject",
+        "z": "7c2d6a116eedd0fb",
+        "name": "Initialiser",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 100,
+        "y": 180,
+        "wires": [
+            [
+                "c23634633c040ce8",
+                "00cde47859c196ab"
+            ]
+        ]
+    },
+    {
+        "id": "f30d6701a9cd6a0c",
+        "type": "OpcUa-Client",
+        "z": "7c2d6a116eedd0fb",
+        "endpoint": "c1b72429877ea2e1",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_12/Subscribe",
+        "x": 480,
+        "y": 300,
+        "wires": [
+            [
+                "76d89bda73046c6f"
+            ]
+        ]
+    },
+    {
+        "id": "c1b72429877ea2e1",
+        "type": "OpcUa-Endpoint",
+        "z": "7c2d6a116eedd0fb",
+        "endpoint": "opc.tcp://172.20.16.1:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "login": false
+    },
+    {
+        "id": "df6507f9f9eb9ed8",
+        "type": "subflow",
+        "name": "STPLC_11 Server (2)",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 80,
+                "y": 240,
+                "wires": [
+                    {
+                        "id": "12ffa1b29fef1ba5"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "dccd228bf997ce4e",
+        "type": "OpcUa-Item",
+        "z": "df6507f9f9eb9ed8",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "xCarrierAvailable",
+        "x": 270,
+        "y": 100,
+        "wires": [
+            [
+                "6af9c16983a121ba"
+            ]
+        ]
+    },
+    {
+        "id": "6af9c16983a121ba",
+        "type": "OpcUa-Client",
+        "z": "df6507f9f9eb9ed8",
+        "endpoint": "058520eaae780f61",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_11/Subscribe",
+        "x": 500,
+        "y": 140,
+        "wires": [
+            [
+                "5a927fdb955fdd56"
+            ]
+        ]
+    },
+    {
+        "id": "12ffa1b29fef1ba5",
+        "type": "OpcUa-Item",
+        "z": "df6507f9f9eb9ed8",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+        "datatype": "Int32",
+        "value": "",
+        "name": "OrderID",
+        "x": 260,
+        "y": 240,
+        "wires": [
+            [
+                "9d42dbfeb12758a7"
+            ]
+        ]
+    },
+    {
+        "id": "ce5dd95cf23a39da",
+        "type": "OpcUa-Item",
+        "z": "df6507f9f9eb9ed8",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+        "datatype": "Int8",
+        "value": "",
+        "name": "CarrierID",
+        "x": 300,
+        "y": 180,
+        "wires": [
+            [
+                "6af9c16983a121ba"
+            ]
+        ]
+    },
+    {
+        "id": "5a927fdb955fdd56",
+        "type": "switch",
+        "z": "df6507f9f9eb9ed8",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "subscriptionId",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 690,
+        "y": 140,
+        "wires": [
+            [
+                "dd86fb9208d2bc83"
+            ],
+            [
+                "85e4287613d322ad"
+            ],
+            [
+                "ad0f485a5a6c425d"
+            ],
+            [
+                "1f8383f75c2fd7d7"
+            ]
+        ]
+    },
+    {
+        "id": "dd86fb9208d2bc83",
+        "type": "mqtt out",
+        "z": "df6507f9f9eb9ed8",
+        "name": "",
+        "topic": "STPLC_11/xCarrierAvailable",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 920,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "85e4287613d322ad",
+        "type": "mqtt out",
+        "z": "df6507f9f9eb9ed8",
+        "name": "",
+        "topic": "STPLC_11/udiONo",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 890,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ad0f485a5a6c425d",
+        "type": "mqtt out",
+        "z": "df6507f9f9eb9ed8",
+        "name": "",
+        "topic": "STPLC_11/uiCarrierId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 900,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "1f8383f75c2fd7d7",
+        "type": "mqtt out",
+        "z": "df6507f9f9eb9ed8",
+        "name": "",
+        "topic": "STPLC_11/subscriptionId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 910,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "5317edc3de5cd898",
+        "type": "inject",
+        "z": "df6507f9f9eb9ed8",
+        "name": "Initialiser",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 80,
+        "y": 160,
+        "wires": [
+            [
+                "dccd228bf997ce4e",
+                "ce5dd95cf23a39da"
+            ]
+        ]
+    },
+    {
+        "id": "9d42dbfeb12758a7",
+        "type": "OpcUa-Client",
+        "z": "df6507f9f9eb9ed8",
+        "endpoint": "058520eaae780f61",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_11/Subscribe",
+        "x": 500,
+        "y": 240,
+        "wires": [
+            [
+                "5a927fdb955fdd56"
+            ]
+        ]
+    },
+    {
+        "id": "058520eaae780f61",
+        "type": "OpcUa-Endpoint",
+        "z": "df6507f9f9eb9ed8",
+        "endpoint": "opc.tcp://172.20.11.1:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "login": false
+    },
+    {
+        "id": "20955ab406473e6f",
+        "type": "subflow",
+        "name": "STPLC_10 Server (2)",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 80,
+                "y": 320,
+                "wires": [
+                    {
+                        "id": "2853bdd13642c4d4"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "c2aa2812ab8ded53",
+        "type": "OpcUa-Item",
+        "z": "20955ab406473e6f",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "xCarrierAvailable",
+        "x": 270,
+        "y": 140,
+        "wires": [
+            [
+                "de4e26b261d107ea"
+            ]
+        ]
+    },
+    {
+        "id": "de4e26b261d107ea",
+        "type": "OpcUa-Client",
+        "z": "20955ab406473e6f",
+        "endpoint": "1e66d5f1a617da21",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_10/Subscribe",
+        "x": 500,
+        "y": 180,
+        "wires": [
+            [
+                "242587a74fa278fa"
+            ]
+        ]
+    },
+    {
+        "id": "2853bdd13642c4d4",
+        "type": "OpcUa-Item",
+        "z": "20955ab406473e6f",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+        "datatype": "Int32",
+        "value": "",
+        "name": "OrderID",
+        "x": 260,
+        "y": 320,
+        "wires": [
+            [
+                "ca582b505d49e9f6"
+            ]
+        ]
+    },
+    {
+        "id": "f36c1c97d105e91b",
+        "type": "OpcUa-Item",
+        "z": "20955ab406473e6f",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+        "datatype": "Int8",
+        "value": "",
+        "name": "CarrierID",
+        "x": 300,
+        "y": 220,
+        "wires": [
+            [
+                "de4e26b261d107ea"
+            ]
+        ]
+    },
+    {
+        "id": "242587a74fa278fa",
+        "type": "switch",
+        "z": "20955ab406473e6f",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "subscriptionId",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 670,
+        "y": 180,
+        "wires": [
+            [
+                "b015a3b3cc4a69e4"
+            ],
+            [
+                "83d7e206b0470278"
+            ],
+            [
+                "ec2205eb58b84416"
+            ],
+            [
+                "05b93344602dbfa1"
+            ]
+        ]
+    },
+    {
+        "id": "b015a3b3cc4a69e4",
+        "type": "mqtt out",
+        "z": "20955ab406473e6f",
+        "name": "",
+        "topic": "STPLC_10/xCarrierAvailable",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 920,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "83d7e206b0470278",
+        "type": "mqtt out",
+        "z": "20955ab406473e6f",
+        "name": "",
+        "topic": "STPLC_10/udiONo",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 890,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "ec2205eb58b84416",
+        "type": "mqtt out",
+        "z": "20955ab406473e6f",
+        "name": "",
+        "topic": "STPLC_10/uiCarrierId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 900,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "05b93344602dbfa1",
+        "type": "mqtt out",
+        "z": "20955ab406473e6f",
+        "name": "",
+        "topic": "STPLC_10/subscriptionId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 910,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "ce17e9063daa015e",
+        "type": "inject",
+        "z": "20955ab406473e6f",
+        "name": "Initialiser",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 100,
+        "y": 180,
+        "wires": [
+            [
+                "c2aa2812ab8ded53",
+                "f36c1c97d105e91b"
+            ]
+        ]
+    },
+    {
+        "id": "ca582b505d49e9f6",
+        "type": "OpcUa-Client",
+        "z": "20955ab406473e6f",
+        "endpoint": "1e66d5f1a617da21",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_10/Subscribe",
+        "x": 480,
+        "y": 320,
+        "wires": [
+            [
+                "242587a74fa278fa"
+            ]
+        ]
+    },
+    {
+        "id": "1e66d5f1a617da21",
+        "type": "OpcUa-Endpoint",
+        "z": "20955ab406473e6f",
+        "endpoint": "opc.tcp://172.20.3.1:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "login": false
+    },
+    {
+        "id": "9dffdc5523e17f54",
+        "type": "subflow",
+        "name": "STPLC_09 Server (2)",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 100,
+                "y": 420,
+                "wires": [
+                    {
+                        "id": "956a3516ab9db4a3"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "070a8b0f3e8f167d",
+        "type": "OpcUa-Item",
+        "z": "9dffdc5523e17f54",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "xCarrierAvailable",
+        "x": 270,
+        "y": 160,
+        "wires": [
+            [
+                "f8c5e38663095c84"
+            ]
+        ]
+    },
+    {
+        "id": "f8c5e38663095c84",
+        "type": "OpcUa-Client",
+        "z": "9dffdc5523e17f54",
+        "endpoint": "140c6c20e1a9a156",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_09/Subscribe",
+        "x": 500,
+        "y": 200,
+        "wires": [
+            [
+                "7bff0333723d7517"
+            ]
+        ]
+    },
+    {
+        "id": "09cd7a25f938e8d3",
+        "type": "OpcUa-Item",
+        "z": "9dffdc5523e17f54",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+        "datatype": "Int8",
+        "value": "",
+        "name": "CarrierID",
+        "x": 300,
+        "y": 240,
+        "wires": [
+            [
+                "f8c5e38663095c84"
+            ]
+        ]
+    },
+    {
+        "id": "7bff0333723d7517",
+        "type": "switch",
+        "z": "9dffdc5523e17f54",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "subscriptionId",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 690,
+        "y": 200,
+        "wires": [
+            [
+                "bd4f97c759df4202"
+            ],
+            [
+                "035e8ac8c0f0c4db"
+            ],
+            [
+                "580e0bb96aa13b54"
+            ],
+            [
+                "59388b476cc4d90b"
+            ]
+        ]
+    },
+    {
+        "id": "bd4f97c759df4202",
+        "type": "mqtt out",
+        "z": "9dffdc5523e17f54",
+        "name": "",
+        "topic": "STPLC_09/xCarrierAvailable",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 900,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "035e8ac8c0f0c4db",
+        "type": "mqtt out",
+        "z": "9dffdc5523e17f54",
+        "name": "",
+        "topic": "STPLC_09/udiONo",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 870,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "580e0bb96aa13b54",
+        "type": "mqtt out",
+        "z": "9dffdc5523e17f54",
+        "name": "",
+        "topic": "STPLC_09/uiCarrierId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 880,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "59388b476cc4d90b",
+        "type": "mqtt out",
+        "z": "9dffdc5523e17f54",
+        "name": "",
+        "topic": "STPLC_09/subscriptionId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 890,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "2b93d42781717efc",
+        "type": "inject",
+        "z": "9dffdc5523e17f54",
+        "name": "Initialiser",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 100,
+        "y": 220,
+        "wires": [
+            [
+                "070a8b0f3e8f167d",
+                "09cd7a25f938e8d3"
+            ]
+        ]
+    },
+    {
+        "id": "956a3516ab9db4a3",
+        "type": "OpcUa-Item",
+        "z": "9dffdc5523e17f54",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+        "datatype": "Int32",
+        "value": "",
+        "name": "OrderID",
+        "x": 220,
+        "y": 420,
+        "wires": [
+            [
+                "970409f8e84eabdf"
+            ]
+        ]
+    },
+    {
+        "id": "970409f8e84eabdf",
+        "type": "OpcUa-Client",
+        "z": "9dffdc5523e17f54",
+        "endpoint": "140c6c20e1a9a156",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_09/Subscribe",
+        "x": 460,
+        "y": 420,
+        "wires": [
+            [
+                "7bff0333723d7517"
+            ]
+        ]
+    },
+    {
+        "id": "e9442953d10cabe7",
+        "type": "OpcUa-Endpoint",
+        "z": "9dffdc5523e17f54",
+        "endpoint": "opc.tcp://172.20.13.1",
+        "secpol": "None",
+        "secmode": "None",
+        "login": false
+    },
+    {
+        "id": "140c6c20e1a9a156",
+        "type": "OpcUa-Endpoint",
+        "z": "9dffdc5523e17f54",
+        "endpoint": "opc.tcp://localhost:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "login": false
+    },
+    {
+        "id": "74d0be98b33a9fe7",
+        "type": "subflow",
+        "name": "STPLC_08 Server (2)",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 120,
+                "y": 360,
+                "wires": [
+                    {
+                        "id": "297620dafd70b1ee"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "cf1c5359e618d113",
+        "type": "OpcUa-Item",
+        "z": "74d0be98b33a9fe7",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "xCarrierAvailable",
+        "x": 310,
+        "y": 160,
+        "wires": [
+            [
+                "7102113b73ce801d"
+            ]
+        ]
+    },
+    {
+        "id": "7102113b73ce801d",
+        "type": "OpcUa-Client",
+        "z": "74d0be98b33a9fe7",
+        "endpoint": "0db29bbda987b298",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_08/Subscribe",
+        "x": 540,
+        "y": 200,
+        "wires": [
+            [
+                "1a0d23bc62258cbb",
+                "be668626c8b570f5"
+            ]
+        ]
+    },
+    {
+        "id": "f932cbdefa6fe189",
+        "type": "OpcUa-Item",
+        "z": "74d0be98b33a9fe7",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+        "datatype": "UInt16",
+        "value": "",
+        "name": "CarrierID",
+        "x": 300,
+        "y": 240,
+        "wires": [
+            [
+                "7102113b73ce801d"
+            ]
+        ]
+    },
+    {
+        "id": "1a0d23bc62258cbb",
+        "type": "switch",
+        "z": "74d0be98b33a9fe7",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "subscriptionId",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 730,
+        "y": 200,
+        "wires": [
+            [
+                "09ef35de139270b1"
+            ],
+            [
+                "09b3dc86f161bc22"
+            ],
+            [
+                "b9dc0f367fea7f91"
+            ],
+            [
+                "dbd551064a81129f"
+            ]
+        ]
+    },
+    {
+        "id": "09ef35de139270b1",
+        "type": "mqtt out",
+        "z": "74d0be98b33a9fe7",
+        "name": "",
+        "topic": "STPLC_08/xCarrierAvailable",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 960,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "09b3dc86f161bc22",
+        "type": "mqtt out",
+        "z": "74d0be98b33a9fe7",
+        "name": "",
+        "topic": "STPLC_08/udiONo",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 930,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b9dc0f367fea7f91",
+        "type": "mqtt out",
+        "z": "74d0be98b33a9fe7",
+        "name": "",
+        "topic": "STPLC_08/uiCarrierId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 940,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "dbd551064a81129f",
+        "type": "mqtt out",
+        "z": "74d0be98b33a9fe7",
+        "name": "",
+        "topic": "STPLC_08/subscriptionId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 950,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "79c54a74b3e0e14e",
+        "type": "inject",
+        "z": "74d0be98b33a9fe7",
+        "name": "Initialiser",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 100,
+        "y": 200,
+        "wires": [
+            [
+                "cf1c5359e618d113",
+                "f932cbdefa6fe189"
+            ]
+        ]
+    },
+    {
+        "id": "297620dafd70b1ee",
+        "type": "OpcUa-Item",
+        "z": "74d0be98b33a9fe7",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+        "datatype": "Int32",
+        "value": "",
+        "name": "OrderID",
+        "x": 260,
+        "y": 360,
+        "wires": [
+            [
+                "664e867dcc830c0c"
+            ]
+        ]
+    },
+    {
+        "id": "664e867dcc830c0c",
+        "type": "OpcUa-Client",
+        "z": "74d0be98b33a9fe7",
+        "endpoint": "0db29bbda987b298",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_08/Read",
+        "x": 510,
+        "y": 360,
+        "wires": [
+            [
+                "1a0d23bc62258cbb"
+            ]
+        ]
+    },
+    {
+        "id": "be668626c8b570f5",
+        "type": "debug",
+        "z": "74d0be98b33a9fe7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1240,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "0db29bbda987b298",
+        "type": "OpcUa-Endpoint",
+        "z": "74d0be98b33a9fe7",
+        "endpoint": "opc.tcp://172.20.1.1:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "login": false
+    },
+    {
+        "id": "76a71ff371243b35",
+        "type": "subflow",
+        "name": "STPLC_14 Server (2)",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 480,
+                "wires": [
+                    {
+                        "id": "36b79285e937c020"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "2d9e5b3d54854077",
+        "type": "OpcUa-Client",
+        "z": "76a71ff371243b35",
+        "endpoint": "77b99d85f7238183",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_14/Subscribe",
+        "x": 660,
+        "y": 200,
+        "wires": [
+            [
+                "c716d34cf25ae6d4"
+            ]
+        ]
+    },
+    {
+        "id": "dd51b47862b23c30",
+        "type": "OpcUa-Item",
+        "z": "76a71ff371243b35",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.swSwitch1.stpStopper.cpfssStopper.xCarrierAvailable",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "xCarrierAvailable/Switch",
+        "x": 370,
+        "y": 60,
+        "wires": [
+            [
+                "2d9e5b3d54854077"
+            ]
+        ]
+    },
+    {
+        "id": "4f5295facf66d438",
+        "type": "OpcUa-Item",
+        "z": "76a71ff371243b35",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.swSwitch1.uiCarrierId",
+        "datatype": "Int8",
+        "value": "",
+        "name": "CarrierID/Switch",
+        "x": 380,
+        "y": 140,
+        "wires": [
+            [
+                "2d9e5b3d54854077"
+            ]
+        ]
+    },
+    {
+        "id": "eaf8698b1571a8e1",
+        "type": "OpcUa-Item",
+        "z": "76a71ff371243b35",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.tstpStopper2.stpStopper.xCarrierAvailable",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "xCarrierAvailable/Outfeed",
+        "x": 370,
+        "y": 200,
+        "wires": [
+            [
+                "2d9e5b3d54854077"
+            ]
+        ]
+    },
+    {
+        "id": "513d2711767b3d3f",
+        "type": "OpcUa-Item",
+        "z": "76a71ff371243b35",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "xCarrierAvailable/Process",
+        "x": 370,
+        "y": 260,
+        "wires": [
+            [
+                "2d9e5b3d54854077"
+            ]
+        ]
+    },
+    {
+        "id": "36d4a4b26ee33cee",
+        "type": "OpcUa-Item",
+        "z": "76a71ff371243b35",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+        "datatype": "Int8",
+        "value": "",
+        "name": "CarrierID/Process",
+        "x": 370,
+        "y": 340,
+        "wires": [
+            [
+                "2d9e5b3d54854077"
+            ]
+        ]
+    },
+    {
+        "id": "c716d34cf25ae6d4",
+        "type": "switch",
+        "z": "76a71ff371243b35",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.swSwitch1.stpStopper.cpfssStopper.xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.swSwitch1.udiONo",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.swSwitch1.uiCarrierId",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.tstpStopper2.stpStopper.xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "subscriptionId",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 8,
+        "x": 850,
+        "y": 200,
+        "wires": [
+            [
+                "0d49fc8c871e7223"
+            ],
+            [
+                "69e7a048f1496ed8"
+            ],
+            [
+                "cb2068c487b864cb"
+            ],
+            [
+                "f54f91069e8f7bae"
+            ],
+            [
+                "c3520f1983237d9d"
+            ],
+            [
+                "93a487e8d1553b95"
+            ],
+            [
+                "e478d202a3f1ac4f"
+            ],
+            [
+                "1d239d89eefa013e"
+            ]
+        ]
+    },
+    {
+        "id": "0d49fc8c871e7223",
+        "type": "mqtt out",
+        "z": "76a71ff371243b35",
+        "name": "",
+        "topic": "STPLC_14/Switch/xCarrierAvailable",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1130,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "69e7a048f1496ed8",
+        "type": "mqtt out",
+        "z": "76a71ff371243b35",
+        "name": "",
+        "topic": "STPLC_14/Switch/udiONo",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1100,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "cb2068c487b864cb",
+        "type": "mqtt out",
+        "z": "76a71ff371243b35",
+        "name": "",
+        "topic": "STPLC_14/Switch/uiCarrierId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1100,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "f54f91069e8f7bae",
+        "type": "mqtt out",
+        "z": "76a71ff371243b35",
+        "name": "",
+        "topic": "STPLC_14/Outfeed/xCarrierAvailable",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1130,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "c3520f1983237d9d",
+        "type": "mqtt out",
+        "z": "76a71ff371243b35",
+        "name": "",
+        "topic": "STPLC_14/Process/xCarrierAvailable",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1130,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "93a487e8d1553b95",
+        "type": "mqtt out",
+        "z": "76a71ff371243b35",
+        "name": "",
+        "topic": "STPLC_14/Process/udiONo",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1100,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "e478d202a3f1ac4f",
+        "type": "mqtt out",
+        "z": "76a71ff371243b35",
+        "name": "",
+        "topic": "STPLC_14/Process/uiCarrierId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1110,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "1d239d89eefa013e",
+        "type": "mqtt out",
+        "z": "76a71ff371243b35",
+        "name": "",
+        "topic": "STPLC_14/subscriptionId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1090,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "bb96184922baee00",
+        "type": "inject",
+        "z": "76a71ff371243b35",
+        "name": "Initialiser",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 120,
+        "y": 200,
+        "wires": [
+            [
+                "eaf8698b1571a8e1",
+                "513d2711767b3d3f",
+                "4f5295facf66d438",
+                "36d4a4b26ee33cee",
+                "dd51b47862b23c30"
+            ]
+        ]
+    },
+    {
+        "id": "0abb414cf515bb87",
+        "type": "OpcUa-Item",
+        "z": "76a71ff371243b35",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.swSwitch1.udiONo",
+        "datatype": "Int32",
+        "value": "",
+        "name": "OrderID/Switch",
+        "x": 380,
+        "y": 460,
+        "wires": [
+            [
+                "afabb27790615950"
+            ]
+        ]
+    },
+    {
+        "id": "21cd46284a9546f8",
+        "type": "OpcUa-Item",
+        "z": "76a71ff371243b35",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+        "datatype": "Int32",
+        "value": "",
+        "name": "OrderID/Process",
+        "x": 370,
+        "y": 500,
+        "wires": [
+            [
+                "afabb27790615950"
+            ]
+        ]
+    },
+    {
+        "id": "36b79285e937c020",
+        "type": "switch",
+        "z": "76a71ff371243b35",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "STPLC_14/Switch/xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "STPLC_14/Process/xCarrierAvailable",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 170,
+        "y": 480,
+        "wires": [
+            [
+                "0abb414cf515bb87",
+                "21cd46284a9546f8"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "afabb27790615950",
+        "type": "OpcUa-Client",
+        "z": "76a71ff371243b35",
+        "endpoint": "77b99d85f7238183",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_14/Subscribe",
+        "x": 620,
+        "y": 480,
+        "wires": [
+            [
+                "c716d34cf25ae6d4"
+            ]
+        ]
+    },
+    {
+        "id": "14210c2e13b2fa2f",
+        "type": "OpcUa-Endpoint",
+        "z": "76a71ff371243b35",
+        "endpoint": "opc.tcp://172.20.1.1:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "login": false
+    },
+    {
+        "id": "77b99d85f7238183",
+        "type": "OpcUa-Endpoint",
+        "z": "76a71ff371243b35",
+        "endpoint": "opc.tcp://172.20.4.1",
+        "secpol": "None",
+        "secmode": "None",
+        "login": false
+    },
+    {
+        "id": "9c4e1357425693df",
+        "type": "subflow",
+        "name": "STPLC_01 Server (2)",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 440,
+                "wires": [
+                    {
+                        "id": "ea71d84a06560e66"
+                    }
+                ]
+            }
+        ],
+        "out": [],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "ed14d26f64a1794c",
+        "type": "OpcUa-Item",
+        "z": "9c4e1357425693df",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.swSwitch1.stpStopper.cpfssStopper.xCarrierAvailable",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "xCarrierAvailable/Infeed",
+        "x": 350,
+        "y": 80,
+        "wires": [
+            [
+                "8303845a3b7aace2"
+            ]
+        ]
+    },
+    {
+        "id": "c695c5f7f89bb6c2",
+        "type": "OpcUa-Item",
+        "z": "9c4e1357425693df",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.tstpStopper2.stpStopper.xCarrierAvailable",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "xCarrierAvailable/Return",
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "8303845a3b7aace2"
+            ]
+        ]
+    },
+    {
+        "id": "3ab7eeea071ddfeb",
+        "type": "OpcUa-Item",
+        "z": "9c4e1357425693df",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+        "datatype": "Boolean",
+        "value": "",
+        "name": "xCarrierAvailable/Outfeed",
+        "x": 350,
+        "y": 280,
+        "wires": [
+            [
+                "8303845a3b7aace2"
+            ]
+        ]
+    },
+    {
+        "id": "d444f9722de0f18a",
+        "type": "OpcUa-Item",
+        "z": "9c4e1357425693df",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+        "datatype": "Int8",
+        "value": "",
+        "name": "CarrierID/Outfeed",
+        "x": 370,
+        "y": 360,
+        "wires": [
+            [
+                "8303845a3b7aace2"
+            ]
+        ]
+    },
+    {
+        "id": "8303845a3b7aace2",
+        "type": "OpcUa-Client",
+        "z": "9c4e1357425693df",
+        "endpoint": "4f4744a6a850e692",
+        "action": "subscribe",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_01/Subscribe",
+        "x": 640,
+        "y": 220,
+        "wires": [
+            [
+                "eceb1830d5f1c2eb"
+            ]
+        ]
+    },
+    {
+        "id": "90e794385bfb19cf",
+        "type": "OpcUa-Item",
+        "z": "9c4e1357425693df",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.swSwitch1.uiCarrierId",
+        "datatype": "Int8",
+        "value": "",
+        "name": "CarrierID/Infeed",
+        "x": 380,
+        "y": 160,
+        "wires": [
+            [
+                "8303845a3b7aace2"
+            ]
+        ]
+    },
+    {
+        "id": "eceb1830d5f1c2eb",
+        "type": "switch",
+        "z": "9c4e1357425693df",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.swSwitch1.stpStopper.cpfssStopper.xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.swSwitch1.udiONo",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.swSwitch1.uiCarrierId",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.tstpStopper2.stpStopper.xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.stpStopper.cpfssStopper.xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.uiCarrierId",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "subscriptionId",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 8,
+        "x": 850,
+        "y": 220,
+        "wires": [
+            [
+                "694dd7037da2c83c"
+            ],
+            [
+                "ef8eea05e5e52a6f"
+            ],
+            [
+                "b075067dbf5987a0"
+            ],
+            [
+                "b43bfdce56e3c95e"
+            ],
+            [
+                "460e51695c61a3eb"
+            ],
+            [
+                "fd3097636b1a296b"
+            ],
+            [
+                "2bc640735074be7d"
+            ],
+            [
+                "b2b7a63523711671"
+            ]
+        ]
+    },
+    {
+        "id": "694dd7037da2c83c",
+        "type": "mqtt out",
+        "z": "9c4e1357425693df",
+        "name": "",
+        "topic": "STPLC_01/Infeed/xCarrierAvailable",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1120,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "ef8eea05e5e52a6f",
+        "type": "mqtt out",
+        "z": "9c4e1357425693df",
+        "name": "",
+        "topic": "STPLC_01/Infeed/udiONo",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1090,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "b075067dbf5987a0",
+        "type": "mqtt out",
+        "z": "9c4e1357425693df",
+        "name": "",
+        "topic": "STPLC_01/Infeed/uiCarrierId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1100,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "b43bfdce56e3c95e",
+        "type": "mqtt out",
+        "z": "9c4e1357425693df",
+        "name": "",
+        "topic": "STPLC_01/Return/xCarrierAvailable",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1130,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "460e51695c61a3eb",
+        "type": "mqtt out",
+        "z": "9c4e1357425693df",
+        "name": "",
+        "topic": "STPLC_01/Outfeed/xCarrierAvailable",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1130,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "fd3097636b1a296b",
+        "type": "mqtt out",
+        "z": "9c4e1357425693df",
+        "name": "",
+        "topic": "STPLC_01/Outfeed/udiONo",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1100,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "2bc640735074be7d",
+        "type": "mqtt out",
+        "z": "9c4e1357425693df",
+        "name": "",
+        "topic": "STPLC_01/Outfeed/uiCarrierId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1110,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b2b7a63523711671",
+        "type": "mqtt out",
+        "z": "9c4e1357425693df",
+        "name": "",
+        "topic": "STPLC_01/subscriptionId",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4294edfdd5d9b1bd",
+        "x": 1090,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "fc9f64742925606c",
+        "type": "inject",
+        "z": "9c4e1357425693df",
+        "name": "Initialiser",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 100,
+        "y": 220,
+        "wires": [
+            [
+                "c695c5f7f89bb6c2",
+                "ed14d26f64a1794c",
+                "90e794385bfb19cf",
+                "3ab7eeea071ddfeb",
+                "d444f9722de0f18a"
+            ]
+        ]
+    },
+    {
+        "id": "4f97d1698abd5e22",
+        "type": "OpcUa-Item",
+        "z": "9c4e1357425693df",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.swSwitch1.udiONo",
+        "datatype": "Int32",
+        "value": "",
+        "name": "OrderID/Infeed",
+        "x": 360,
+        "y": 420,
+        "wires": [
+            [
+                "df8f71098f7d6860"
+            ]
+        ]
+    },
+    {
+        "id": "e04c6b85ab72cfce",
+        "type": "OpcUa-Item",
+        "z": "9c4e1357425693df",
+        "item": "ns=2;s=|var|CECC-LK.Application.FBs.stpStopper1.udiONo",
+        "datatype": "Int32",
+        "value": "",
+        "name": "OrderID/Outfeed",
+        "x": 350,
+        "y": 460,
+        "wires": [
+            [
+                "df8f71098f7d6860"
+            ]
+        ]
+    },
+    {
+        "id": "ea71d84a06560e66",
+        "type": "switch",
+        "z": "9c4e1357425693df",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "STPLC_01/Infeed/xCarrierAvailable",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "STPLC_01/Outfeed/xCarrierAvailable",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 150,
+        "y": 440,
+        "wires": [
+            [
+                "4f97d1698abd5e22",
+                "e04c6b85ab72cfce"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "df8f71098f7d6860",
+        "type": "OpcUa-Client",
+        "z": "9c4e1357425693df",
+        "endpoint": "4f4744a6a850e692",
+        "action": "read",
+        "deadbandtype": "a",
+        "deadbandvalue": "0",
+        "time": "100",
+        "timeUnit": "ms",
+        "certificate": "n",
+        "localfile": "",
+        "localkeyfile": "",
+        "securitymode": "None",
+        "securitypolicy": "None",
+        "name": "STPLC_01/Subscribe",
+        "x": 580,
+        "y": 440,
+        "wires": [
+            [
+                "eceb1830d5f1c2eb"
+            ]
+        ]
+    },
+    {
+        "id": "4f4744a6a850e692",
+        "type": "OpcUa-Endpoint",
+        "endpoint": "opc.tcp://172.20.8.1:4840",
+        "secpol": "None",
+        "secmode": "None",
+        "login": false
+    },
+    {
+        "id": "4294edfdd5d9b1bd",
+        "type": "mqtt-broker",
+        "name": "Broker",
+        "broker": "172.20.66.150",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "0869b93c1601cb84",
+        "type": "tab",
+        "label": "OPC UA Server Subscriptions",
+        "disabled": false,
+        "info": "This flow initialises the OPC UA Subscriptions for\nthe following variables:\n\n - xCarrierAvailable\n - OrderID\n - CarrierID\n\nNew variables can be added using an OPC UA Item node\nfrom the node-red-contrib-opcua library. A new LinkOut node will be needed for each new item.",
+        "env": []
+    },
+    {
+        "id": "13b73912cbef8257",
+        "type": "subflow:9c4e1357425693df",
+        "z": "0869b93c1601cb84",
+        "name": "",
+        "env": [],
+        "x": 350,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "9e8dd6187bcde881",
+        "type": "subflow:76a71ff371243b35",
+        "z": "0869b93c1601cb84",
+        "name": "",
+        "env": [],
+        "x": 350,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "7e78ecdafcf4b32e",
+        "type": "subflow:74d0be98b33a9fe7",
+        "z": "0869b93c1601cb84",
+        "name": "",
+        "env": [],
+        "x": 350,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "62ba54aa58f6301d",
+        "type": "subflow:9dffdc5523e17f54",
+        "z": "0869b93c1601cb84",
+        "name": "",
+        "env": [],
+        "x": 350,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "0559dc022e1ce56e",
+        "type": "subflow:20955ab406473e6f",
+        "z": "0869b93c1601cb84",
+        "name": "",
+        "env": [],
+        "x": 350,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "8bfbd2bde1026e57",
+        "type": "subflow:df6507f9f9eb9ed8",
+        "z": "0869b93c1601cb84",
+        "name": "",
+        "env": [],
+        "x": 350,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "1b4852ab8ad851db",
+        "type": "subflow:7c2d6a116eedd0fb",
+        "z": "0869b93c1601cb84",
+        "name": "",
+        "env": [],
+        "x": 350,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "0a2df5eb5fc4ede2",
+        "type": "subflow:2da7505b1656b7e2",
+        "z": "0869b93c1601cb84",
+        "name": "",
+        "env": [],
+        "x": 350,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "4d143844febe1726",
+        "type": "link in",
+        "z": "0869b93c1601cb84",
+        "name": "Read: STPLC_08/udiONo",
+        "links": [
+            "103132c68c852655"
+        ],
+        "x": 195,
+        "y": 180,
+        "wires": [
+            [
+                "7e78ecdafcf4b32e"
+            ]
+        ]
+    },
+    {
+        "id": "a61a8f83f0618ff9",
+        "type": "link in",
+        "z": "0869b93c1601cb84",
+        "name": "Read: STPLC_01/Infeed||Outfeed/udiONo",
+        "links": [
+            "6771f9befe8231e5",
+            "9a234bdeaf1a39d8"
+        ],
+        "x": 195,
+        "y": 140,
+        "wires": [
+            [
+                "13b73912cbef8257"
+            ]
+        ]
+    },
+    {
+        "id": "a8d7e8d60ed2f63f",
+        "type": "link in",
+        "z": "0869b93c1601cb84",
+        "name": "Read: STPLC_09/udiONo",
+        "links": [
+            "2b5ef03f4d6848fa"
+        ],
+        "x": 195,
+        "y": 220,
+        "wires": [
+            [
+                "62ba54aa58f6301d"
+            ]
+        ]
+    },
+    {
+        "id": "d6e3f01c7470ca80",
+        "type": "link in",
+        "z": "0869b93c1601cb84",
+        "name": "Read: STPLC_10/udiONo",
+        "links": [
+            "539ae9297a1a774b"
+        ],
+        "x": 195,
+        "y": 260,
+        "wires": [
+            [
+                "0559dc022e1ce56e"
+            ]
+        ]
+    },
+    {
+        "id": "9248de6c6698d227",
+        "type": "link in",
+        "z": "0869b93c1601cb84",
+        "name": "Read: STPLC_11/udiONo",
+        "links": [
+            "316bc76aa6e74287"
+        ],
+        "x": 195,
+        "y": 300,
+        "wires": [
+            [
+                "8bfbd2bde1026e57"
+            ]
+        ]
+    },
+    {
+        "id": "d69368445cc679a4",
+        "type": "link in",
+        "z": "0869b93c1601cb84",
+        "name": "Read: STPLC_12/udiONo",
+        "links": [
+            "93a07e784733acbe",
+            "7e394e5ec244996e"
+        ],
+        "x": 195,
+        "y": 340,
+        "wires": [
+            [
+                "1b4852ab8ad851db"
+            ]
+        ]
+    },
+    {
+        "id": "5a943c7389a830d4",
+        "type": "link in",
+        "z": "0869b93c1601cb84",
+        "name": "Read: STPLC_13/udiONo",
+        "links": [
+            "c94484ca196ac629"
+        ],
+        "x": 195,
+        "y": 380,
+        "wires": [
+            [
+                "0a2df5eb5fc4ede2"
+            ]
+        ]
+    },
+    {
+        "id": "6749c3c8d3cd0d50",
+        "type": "link in",
+        "z": "0869b93c1601cb84",
+        "name": "Read: STPLC_14/Switch||Process/udiONo",
+        "links": [
+            "ada4b754bd888b1c",
+            "d0a43782c859bc7a"
+        ],
+        "x": 195,
+        "y": 420,
+        "wires": [
+            [
+                "9e8dd6187bcde881"
+            ]
+        ]
+    }
+]
